@@ -1,0 +1,25 @@
+.gameBoard{
+    background-color: gray;
+    max-width: 250px;
+    padding: 10px;
+}
+
+.gameBoardRow{
+    margin: 10px;
+    padding: 10px;    
+}
+
+.gameBoardSquare{
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer
+}
+
+.O{
+    color: blue;
+}
+
+.X{
+    color: red;
+}
