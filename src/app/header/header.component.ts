@@ -34,25 +34,9 @@ export class HeaderComponent {
       showOnDesktop: true
     },
     {
-      label: 'Chemistry Calculator',
-      icon: 'science',
-      route: '/chemistry',
-      showOnMobile: false,
-      showOnTablet: false,
-      showOnDesktop: false
-    },
-    {
-      label: 'Tic Tac Toe',
-      icon: 'extension',
-      route: '/tic-tac-toe',
-      showOnMobile: false,
-      showOnTablet: false,
-      showOnDesktop: false
-    },
-    {
-      label: 'More',
-      icon: 'add',
-      route: '/more',
+      label: 'Coding Challenges',
+      icon: 'psychology',
+      route: '/coding-challenges',
       showOnMobile: false,
       showOnTablet: false,
       showOnDesktop: false

@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChemistryCalculatorComponent } from './chemistry-calculator/chemistry-calculator.component';
 import { HeaderComponent } from './header/header.component';
-
 import { FormsModule } from '@angular/forms';
 
 import { MatListModule } from '@angular/material/list';
@@ -25,8 +23,10 @@ import { AboutMeComponent } from './about-me/about-me.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CertificatesComponent } from './certificates/certificates.component';
-import { TicTacToeComponent } from './tic-tac-toe/tic-tac-toe.component';
-import { MoreComponent } from './more/more.component';
+import { CodingChallengesComponent } from './coding-challenges/coding-challenges.component';
+import { ChemistryCalculatorComponent } from './coding-challenges/chemistry-calculator/chemistry-calculator.component';
+import { TicTacToeComponent } from './coding-challenges/tic-tac-toe/tic-tac-toe.component';
+import { RomanNumeralsComponent } from './coding-challenges/roman-numerals/roman-numerals.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { MoreComponent } from './more/more.component';
     NotFoundComponent,
     CertificatesComponent,
     TicTacToeComponent,
-    MoreComponent
+    CodingChallengesComponent,
+    RomanNumeralsComponent
   ],
   imports: [
     BrowserModule,

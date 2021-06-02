@@ -1,3 +1,4 @@
+<h3>{{ title }}</h3>
 <h3>{{ winnerStatus }}</h3>
 <div class="gameBoard">
     <div *ngFor="let row of ticTacGameBoard; let i=index;" class="gameBoardRow">
@@ -6,4 +7,4 @@
         </span>
     </div>
 </div>
-<button (click)="restart()">Restart</button>
+<button mat-raised-button color="primary" (click)="restart()">Restart</button>

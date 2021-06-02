@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'chemistry-calculator',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./chemistry-calculator.component.css']
 })
 export class ChemistryCalculatorComponent {
-  public compound: string = "";
+  @Input() title: string = '';
+  public compound: string = '';
   public Elements: any = {};
   public ElementsArr: any[] = [];
   public compoundExamples: string[] = ['H2O', 'H2O2', 'NaHCO3', 'C6H12O6'];

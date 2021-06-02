@@ -1,0 +1,13 @@
+<h3>{{ title }}</h3>
+<mat-form-field>
+    <mat-label>Enter Numeral</mat-label>
+    <input matInput type="text" [(ngModel)]="numeral">
+    <button mat-button *ngIf="numeral" matSuffix mat-icon-button aria-label="Clear" (click)="numeral=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<button mat-button color="primary" [disabled]="numeral === ''" (click)="calculateNumeral(numeral)">Enter</button>
+<h5>Roman to Integer List:</h5>
+<mat-list-item role="listitem" *ngFor="let roman of romanToInt">
+    {{ roman.numeral }}: {{ roman.int }}
+</mat-list-item>

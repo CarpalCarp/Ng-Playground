@@ -1,13 +1,14 @@
 import { WinnerFound } from './winner-found';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-tic-tac-toe',
+  selector: 'tic-tac-toe',
   templateUrl: './tic-tac-toe.component.html',
   styleUrls: ['./tic-tac-toe.component.css']
 })
 
 export class TicTacToeComponent {
+  @Input() title: string = '';
   private XTurn = true;
   public winnerStatus = ' ';
   public gameOver = false;
