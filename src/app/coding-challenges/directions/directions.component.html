@@ -1,0 +1,22 @@
+<h3>{{ title }}</h3>
+<p>This challenge is about taking a list of directions and taking out the useless ones.
+</p>
+<p>For example, north and south are
+    opposites so if next to each other they cancel out.
+</p>
+<p>Same with east and west. North, south and west will reduce to
+    just west.</p>
+<mat-label>Click direction to add</mat-label>
+<div>
+    <button mat-button color="primary" (click)="addNorth()">North</button>
+    <button mat-button color="primary" (click)="addSouth()">South</button>
+    <button mat-button color="primary" (click)="addEast()">East</button>
+    <button mat-button color="primary" (click)="addWest()">West</button>
+    <button mat-button color="primary" [disabled]="directions.length === 0" (click)="clear()">Clear</button>
+</div>
+<div>
+    <button mat-button color="primary" [disabled]="directions.length < 2" (click)="dirReduce()">Reduce</button>
+</div>
+<mat-list-item role="listitem" *ngFor="let direction of directions">
+    {{ direction }}
+</mat-list-item>

@@ -27,6 +27,7 @@ import { CodingChallengesComponent } from './coding-challenges/coding-challenges
 import { ChemistryCalculatorComponent } from './coding-challenges/chemistry-calculator/chemistry-calculator.component';
 import { TicTacToeComponent } from './coding-challenges/tic-tac-toe/tic-tac-toe.component';
 import { RomanNumeralsComponent } from './coding-challenges/roman-numerals/roman-numerals.component';
+import { DirectionsComponent } from './coding-challenges/directions/directions.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RomanNumeralsComponent } from './coding-challenges/roman-numerals/roman
     CertificatesComponent,
     TicTacToeComponent,
     CodingChallengesComponent,
-    RomanNumeralsComponent
+    RomanNumeralsComponent,
+    DirectionsComponent
   ],
   imports: [
     BrowserModule,
