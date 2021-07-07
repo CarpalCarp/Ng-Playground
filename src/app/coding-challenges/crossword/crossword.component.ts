@@ -74,10 +74,6 @@ export class CrosswordComponent {
       this.insert(count, randLoc, word.value);
       count++;
     }
-    this.takenSpaces.forEach((entry: any) => {
-      console.log(entry);
-      console.log('\n');
-    });
   }
 
   private getRandomLocation(word: Word) { return Math.floor(Math.random() * this.getBoundsOfCrossword(word.valueLength)) }
@@ -86,15 +82,30 @@ export class CrosswordComponent {
 
   // insert() places a word randomly in the crossword
   private insert(iterOne: number, iterTwo: number, word: string) {
+    console.log("Inserting " + word);
     let rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
     if (rand === 6 || rand === 7)
       iterOne = 5;
     let rowCol: number[] = [];
     for (let i = 0; i < word.length; i++) {
-      if (iterTwo > 9)
+      if (iterTwo > 9) {
         iterTwo = 0;
-      if (iterOne > 9)
+        rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
+        console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+        console.log(`Retrying...`);
+        this.removeFromTakenSpaces(i);
+        i = 0;
+      }
+      if (iterOne > 9 || iterOne < 0) {
         iterOne = 0;
+        rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
+        if (rand === 6 || rand === 7)
+          iterOne = 5;
+        console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+        console.log(`Retrying...`);
+        this.removeFromTakenSpaces(i);
+        i = 0;
+      }
       switch (rand) {
         case 0: // vertical reverse insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
@@ -159,8 +170,11 @@ export class CrosswordComponent {
         this.crossword[row][col] = word.split('').reverse()[i]; // error here
       else
         this.crossword[row][col] = word.split('')[i];
+      console.log(`Added ${word.split('')[i]} to ${row},${col}`);
       this.takenSpaces.push(`${row},${col}`); // save location in crossword
     } else {
+      console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+      console.log(`Retrying...`);
       if (i > 0)
         this.removeFromTakenSpaces(i);
       i = -1;
