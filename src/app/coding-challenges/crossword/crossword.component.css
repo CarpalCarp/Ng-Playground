@@ -1,0 +1,7 @@
+span{
+    font-family: Consolas;
+}
+
+#crosswordDiv > span > span{
+    padding: 5px;
+}

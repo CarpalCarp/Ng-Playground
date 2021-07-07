@@ -1,0 +1,13 @@
+<h3>{{ title }}</h3>
+<mat-form-field>
+    <mat-label>To do</mat-label>
+    <input matInput type="text" [(ngModel)]="toDo">
+    <button mat-button *ngIf="toDo" matSuffix mat-icon-button aria-label="Clear" (click)="toDo=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<button mat-button color="primary" [disabled]="toDo === ''" (click)="addToDo(toDo)">Add</button>
+<ul *ngIf="listOfTodos.length !== 0">
+    <to-do (removedTodo)="removeItem($event)" *ngFor="let todo of listOfTodos; let i = index" [singleTodo]="todo"
+        [indexOfTodo]="i"></to-do>
+</ul>

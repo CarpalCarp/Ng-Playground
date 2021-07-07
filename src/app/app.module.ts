@@ -28,6 +28,9 @@ import { ChemistryCalculatorComponent } from './coding-challenges/chemistry-calc
 import { TicTacToeComponent } from './coding-challenges/tic-tac-toe/tic-tac-toe.component';
 import { RomanNumeralsComponent } from './coding-challenges/roman-numerals/roman-numerals.component';
 import { DirectionsComponent } from './coding-challenges/directions/directions.component';
+import { ToDoListComponent } from './coding-challenges/to-do-list/to-do-list.component';
+import { ToDoComponent } from './coding-challenges/to-do-list/to-do/to-do.component';
+import { CrosswordComponent } from './coding-challenges/crossword/crossword.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { DirectionsComponent } from './coding-challenges/directions/directions.c
     TicTacToeComponent,
     CodingChallengesComponent,
     RomanNumeralsComponent,
-    DirectionsComponent
+    DirectionsComponent,
+    ToDoListComponent,
+    ToDoComponent,
+    CrosswordComponent
   ],
   imports: [
     BrowserModule,
