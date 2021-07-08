@@ -1,17 +1,22 @@
 import { Word } from './word.model';
+import { InsertionMethods } from './insertionMethods.model';
 import { Component, Input } from '@angular/core';
+
 @Component({
   selector: 'crossword',
   templateUrl: './crossword.component.html',
   styleUrls: ['./crossword.component.css']
 })
+
 export class CrosswordComponent {
   @Input() title: string = '';
   private NUMOFCOLUMNS: number = 10;
   private NUMOFROWS: number = 10;
+  private NUMOFINSERTIONMETHODS: number = 8;
   private ASCIICAPITALCHARAMOUNT: number = 26; // 26 total ascii characters to choose from
   private ASCIICAPITALMAX: number = 65; // 65 is where the capital characters start in ascii
   private takenSpaces: string[] = [];
+
 
   public crossword: string[][] = [
     new Array(this.NUMOFCOLUMNS),
@@ -70,8 +75,7 @@ export class CrosswordComponent {
   private insertWords() {
     let count = 0;
     for (let word of this.words) {
-      let randLoc = this.getRandomLocation(word);
-      this.insert(count, randLoc, word.value);
+      this.insert(count, this.getRandomLocation(word), word.value);
       count++;
     }
   }
@@ -82,105 +86,111 @@ export class CrosswordComponent {
 
   // insert() places a word randomly in the crossword
   private insert(iterOne: number, iterTwo: number, word: string) {
-    console.log("Inserting " + word);
-    let rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
-    if (rand === 6 || rand === 7)
-      iterOne = 5;
+    let crosswordMetaData = {
+      row: iterOne,
+      col: iterTwo,
+      crosswd: word
+    }
+    //console.log("Inserting " + word);
+    const HALFWAYPOINT: number = 5;
+    let rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
+    if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
+      iterOne = HALFWAYPOINT;
     let rowCol: number[] = [];
     for (let i = 0; i < word.length; i++) {
-      if (iterTwo > 9) {
+      if (iterTwo > this.NUMOFCOLUMNS - 1) {
         iterTwo = 0;
-        rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
-        console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
-        console.log(`Retrying...`);
+        rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
+        //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+        //console.log(`Retrying...`);
         this.removeFromTakenSpaces(i);
         i = 0;
       }
-      if (iterOne > 9 || iterOne < 0) {
+      if (iterOne > this.NUMOFCOLUMNS - 1 || iterOne < 0) {
         iterOne = 0;
-        rand = Math.floor(Math.random() * 8); // get random number between 0 and 7
-        if (rand === 6 || rand === 7)
-          iterOne = 5;
-        console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
-        console.log(`Retrying...`);
+        rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
+        if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
+          iterOne = HALFWAYPOINT;
+        //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+        //console.log(`Retrying...`);
         this.removeFromTakenSpaces(i);
         i = 0;
       }
       switch (rand) {
-        case 0: // vertical reverse insert
+        case InsertionMethods.IsVerticalReverse: // vertical reverse insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          i = rowCol[2];
           break;
-        case 1: // vertical insert
+        case InsertionMethods.IsVertical: // vertical insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          i = rowCol[2];
           break;
-        case 2: // horizontal reverse insert
+        case InsertionMethods.IsHorizontalReverse: // horizontal reverse insert
           rowCol = this.insertHelper(iterOne, iterTwo, word, i, true);
           iterOne = rowCol[0];
           iterTwo = rowCol[1];
-          i = rowCol[2];
           break;
-        case 3: // horizontal insert
+        case InsertionMethods.IsHorizontal: // horizontal insert
           rowCol = this.insertHelper(iterOne, iterTwo, word, i);
           iterOne = rowCol[0];
           iterTwo = rowCol[1];
-          i = rowCol[2];
           break;
-        case 4: // diagonal back reverse insert
+        case InsertionMethods.IsDiagonalBackReverse: // diagonal back reverse insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          iterOne++;
-          i = rowCol[2];
           break;
-        case 5: // diagonal back insert
+        case InsertionMethods.IsDiagonalBack: // diagonal back insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          iterOne++;
-          i = rowCol[2];
           break;
-        case 6: // diagonal forward reverse insert
+        case InsertionMethods.IsDiagonalForwardReverse: // diagonal forward reverse insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          iterOne--;
-          i = rowCol[2];
           break;
-        case 7: // diagonal forward insert
+        case InsertionMethods.IsDiagonalForward: // diagonal forward insert
           rowCol = this.insertHelper(iterTwo, iterOne, word, i);
           iterTwo = rowCol[0];
           iterOne = rowCol[1];
-          iterOne--;
-          i = rowCol[2];
           break;
       }
+
+      if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
+        iterOne--;
+      else if (rand === InsertionMethods.IsDiagonalBackReverse || rand === InsertionMethods.IsDiagonalBack)
+        iterOne++;
+
+      i = rowCol[2];
       iterTwo++;
     }
   }
 
   private insertHelper(row: number, col: number, word: string, i: number, reverse?: boolean) {
     if (!this.takenSpaces.includes(`${row},${col}`)) {
-      if (reverse)
-        this.crossword[row][col] = word.split('').reverse()[i]; // error here
-      else
-        this.crossword[row][col] = word.split('')[i];
-      console.log(`Added ${word.split('')[i]} to ${row},${col}`);
-      this.takenSpaces.push(`${row},${col}`); // save location in crossword
+      this.checkIfReverse(row, col, word, i, reverse);
+      //console.log(`Added ${word.split('')[i]} to ${row},${col}`);
     } else {
-      console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
-      console.log(`Retrying...`);
+      //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+      //console.log(`Retrying...`);
       if (i > 0)
         this.removeFromTakenSpaces(i);
       i = -1;
       return [row++, col, i];
     }
     return [row, col, i];
+  }
+
+  // if reverse is true then insert word in reverse
+  private checkIfReverse(row: number, col: number, word: string, i: number, reverse?: boolean) {
+    if (reverse)
+      this.crossword[row][col] = word.split('').reverse()[i];
+    else
+      this.crossword[row][col] = word.split('')[i];
+    this.takenSpaces.push(`${row},${col}`); // save location in crossword
   }
 
   private removeFromTakenSpaces(currentIndex: number) {
