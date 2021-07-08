@@ -86,7 +86,7 @@ export class CrosswordComponent {
 
   // insert() places a word randomly in the crossword
   private insert(iterOne: number, iterTwo: number, word: string) {
-    let crosswordMetaData = {
+    let crosswdMetaData = {
       row: iterOne,
       col: iterTwo,
       crosswd: word
@@ -95,22 +95,22 @@ export class CrosswordComponent {
     const HALFWAYPOINT: number = 5;
     let rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
     if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
-      iterOne = HALFWAYPOINT;
+      crosswdMetaData.row = HALFWAYPOINT;
     let rowCol: number[] = [];
-    for (let i = 0; i < word.length; i++) {
-      if (iterTwo > this.NUMOFCOLUMNS - 1) {
-        iterTwo = 0;
+    for (let i = 0; i < crosswdMetaData.crosswd.length; i++) {
+      if (crosswdMetaData.col > this.NUMOFCOLUMNS - 1) {
+        crosswdMetaData.col = 0;
         rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
         //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
         //console.log(`Retrying...`);
         this.removeFromTakenSpaces(i);
         i = 0;
       }
-      if (iterOne > this.NUMOFCOLUMNS - 1 || iterOne < 0) {
-        iterOne = 0;
+      if (crosswdMetaData.row > this.NUMOFCOLUMNS - 1 || crosswdMetaData.row < 0) {
+        crosswdMetaData.row = 0;
         rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
         if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
-          iterOne = HALFWAYPOINT;
+          crosswdMetaData.row = HALFWAYPOINT;
         //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
         //console.log(`Retrying...`);
         this.removeFromTakenSpaces(i);
@@ -118,54 +118,54 @@ export class CrosswordComponent {
       }
       switch (rand) {
         case InsertionMethods.IsVerticalReverse: // vertical reverse insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
         case InsertionMethods.IsVertical: // vertical insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
         case InsertionMethods.IsHorizontalReverse: // horizontal reverse insert
-          rowCol = this.insertHelper(iterOne, iterTwo, word, i, true);
-          iterOne = rowCol[0];
-          iterTwo = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.row, crosswdMetaData.col, crosswdMetaData.crosswd, i, true);
+          crosswdMetaData.row = rowCol[0];
+          crosswdMetaData.col = rowCol[1];
           break;
         case InsertionMethods.IsHorizontal: // horizontal insert
-          rowCol = this.insertHelper(iterOne, iterTwo, word, i);
-          iterOne = rowCol[0];
-          iterTwo = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.row, crosswdMetaData.col, crosswdMetaData.crosswd, i);
+          crosswdMetaData.row = rowCol[0];
+          crosswdMetaData.col = rowCol[1];
           break;
         case InsertionMethods.IsDiagonalBackReverse: // diagonal back reverse insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
         case InsertionMethods.IsDiagonalBack: // diagonal back insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
         case InsertionMethods.IsDiagonalForwardReverse: // diagonal forward reverse insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i, true);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
         case InsertionMethods.IsDiagonalForward: // diagonal forward insert
-          rowCol = this.insertHelper(iterTwo, iterOne, word, i);
-          iterTwo = rowCol[0];
-          iterOne = rowCol[1];
+          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
+          crosswdMetaData.col = rowCol[0];
+          crosswdMetaData.row = rowCol[1];
           break;
       }
 
       if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
-        iterOne--;
+        crosswdMetaData.row--;
       else if (rand === InsertionMethods.IsDiagonalBackReverse || rand === InsertionMethods.IsDiagonalBack)
-        iterOne++;
+        crosswdMetaData.row++;
 
       i = rowCol[2];
-      iterTwo++;
+      crosswdMetaData.col++;
     }
   }
 
