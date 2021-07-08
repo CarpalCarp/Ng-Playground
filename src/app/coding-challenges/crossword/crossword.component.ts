@@ -2,12 +2,19 @@ import { Word } from './word.model';
 import { InsertionMethods } from './insertionMethods.model';
 import { Component, Input } from '@angular/core';
 
+interface CWMetaData {
+  row: number,
+  col: number,
+  crosswd: string
+  reverse: boolean,
+  iterator: number
+}
+
 @Component({
   selector: 'crossword',
   templateUrl: './crossword.component.html',
   styleUrls: ['./crossword.component.css']
 })
-
 export class CrosswordComponent {
   @Input() title: string = '';
   private NUMOFCOLUMNS: number = 10;
@@ -86,17 +93,19 @@ export class CrosswordComponent {
 
   // insert() places a word randomly in the crossword
   private insert(iterOne: number, iterTwo: number, word: string) {
-    let crosswdMetaData = {
+    let crosswdMetaData: CWMetaData = {
       row: iterOne,
       col: iterTwo,
-      crosswd: word
+      crosswd: word,
+      reverse: false,
+      iterator: 0
     }
     //console.log("Inserting " + word);
     const HALFWAYPOINT: number = 5;
     let rand = Math.floor(Math.random() * this.NUMOFINSERTIONMETHODS); // get random number between 0 and 7
     if (rand === InsertionMethods.IsDiagonalForwardReverse || rand === InsertionMethods.IsDiagonalForward)
       crosswdMetaData.row = HALFWAYPOINT;
-    let rowCol: number[] = [];
+
     for (let i = 0; i < crosswdMetaData.crosswd.length; i++) {
       if (crosswdMetaData.col > this.NUMOFCOLUMNS - 1) {
         crosswdMetaData.col = 0;
@@ -116,46 +125,35 @@ export class CrosswordComponent {
         this.removeFromTakenSpaces(i);
         i = 0;
       }
+
       switch (rand) {
         case InsertionMethods.IsVerticalReverse: // vertical reverse insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData.reverse = true;
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsVertical: // vertical insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsHorizontalReverse: // horizontal reverse insert
-          rowCol = this.insertHelper(crosswdMetaData.row, crosswdMetaData.col, crosswdMetaData.crosswd, i, true);
-          crosswdMetaData.row = rowCol[0];
-          crosswdMetaData.col = rowCol[1];
+          crosswdMetaData.reverse = true;
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsHorizontal: // horizontal insert
-          rowCol = this.insertHelper(crosswdMetaData.row, crosswdMetaData.col, crosswdMetaData.crosswd, i);
-          crosswdMetaData.row = rowCol[0];
-          crosswdMetaData.col = rowCol[1];
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsDiagonalBackReverse: // diagonal back reverse insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData.reverse = true;
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsDiagonalBack: // diagonal back insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsDiagonalForwardReverse: // diagonal forward reverse insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i, true);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData.reverse = true;
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
         case InsertionMethods.IsDiagonalForward: // diagonal forward insert
-          rowCol = this.insertHelper(crosswdMetaData.col, crosswdMetaData.row, crosswdMetaData.crosswd, i);
-          crosswdMetaData.col = rowCol[0];
-          crosswdMetaData.row = rowCol[1];
+          crosswdMetaData = this.insertHelper(crosswdMetaData, i);
           break;
       }
 
@@ -164,12 +162,13 @@ export class CrosswordComponent {
       else if (rand === InsertionMethods.IsDiagonalBackReverse || rand === InsertionMethods.IsDiagonalBack)
         crosswdMetaData.row++;
 
-      i = rowCol[2];
+      i = crosswdMetaData.iterator; // update i
       crosswdMetaData.col++;
+      crosswdMetaData.reverse = false;
     }
   }
 
-  private insertHelper(row: number, col: number, word: string, i: number, reverse?: boolean) {
+  /*private insertHelper(row: number, col: number, word: string, i: number, reverse?: boolean) {
     if (!this.takenSpaces.includes(`${row},${col}`)) {
       this.checkIfReverse(row, col, word, i, reverse);
       //console.log(`Added ${word.split('')[i]} to ${row},${col}`);
@@ -182,15 +181,40 @@ export class CrosswordComponent {
       return [row++, col, i];
     }
     return [row, col, i];
+  }*/
+
+  private insertHelper(MetaData: CWMetaData, i: number) {
+    if (!this.takenSpaces.includes(`${MetaData.row},${MetaData.col}`)) {
+      this.checkIfReverse(MetaData, i);
+      //console.log(`Added ${word.split('')[i]} to ${row},${col}`);
+    } else {
+      //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
+      //console.log(`Retrying...`);
+      if (i > 0)
+        this.removeFromTakenSpaces(i);
+      MetaData.iterator = -1;
+      MetaData.row++;
+      return MetaData;
+    }
+    MetaData.iterator = i;
+    return MetaData;
   }
 
   // if reverse is true then insert word in reverse
-  private checkIfReverse(row: number, col: number, word: string, i: number, reverse?: boolean) {
+  /*private checkIfReverse(row: number, col: number, word: string, i: number, reverse?: boolean) {
     if (reverse)
       this.crossword[row][col] = word.split('').reverse()[i];
     else
       this.crossword[row][col] = word.split('')[i];
     this.takenSpaces.push(`${row},${col}`); // save location in crossword
+  }*/
+
+  private checkIfReverse(MetaData: CWMetaData, i: number) {
+    if (MetaData.reverse)
+      this.crossword[MetaData.row][MetaData.col] = MetaData.crosswd.split('').reverse()[i];
+    else
+      this.crossword[MetaData.row][MetaData.col] = MetaData.crosswd.split('')[i];
+    this.takenSpaces.push(`${MetaData.row},${MetaData.col}`); // save location in crossword
   }
 
   private removeFromTakenSpaces(currentIndex: number) {
