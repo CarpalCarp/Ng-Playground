@@ -1,0 +1,22 @@
+.margin-top{
+    margin-top: 40px;
+}
+
+.margin-left-right{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.certificate-card{
+    max-width: 500px;
+}
+
+.pos-center{
+    display: flex;
+    justify-content: center;
+}
+
+.certificate-header-image{
+    background-image: url('../../assets/certificates/UdemyLogo.PNG');
+    background-size: cover;
+}

@@ -1,1 +1,30 @@
-<p>certificates works!</p>
+<div class="row margin-top pos-center" *ngFor="let certificate of certificates">
+    <div class="col-md-4 col-sm-4 margin-left-right">
+        <mat-card class="certificate-card">
+            <mat-card-header>
+                <div mat-card-avatar class="certificate-header-image"></div>
+                <mat-card-title>{{ certificate[0].title }}</mat-card-title>
+                <mat-card-subtitle>{{ certificate[0].subtitle }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="certificate[0].src" [alt]="certificate[0].title">
+            <mat-card-content>
+                <p>
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-md-4 col-sm-4 margin-left-right">
+        <mat-card class="certificate-card">
+            <mat-card-header>
+                <div mat-card-avatar class="certificate-header-image"></div>
+                <mat-card-title>{{ certificate[1].title }}</mat-card-title>
+                <mat-card-subtitle>{{ certificate[1].subtitle }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="certificate[1].src" [alt]="certificate[1].title">
+            <mat-card-content>
+                <p>
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

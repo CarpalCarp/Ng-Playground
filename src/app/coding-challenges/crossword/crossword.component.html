@@ -1,8 +1,14 @@
 <h3>{{ title }}</h3>
+<div>
+    <h4>Words:</h4>
+    <ul *ngFor="let word of words">
+        <li>{{ word.value }}</li>
+    </ul>
+</div>
 <div id="crosswordDiv" *ngFor="let row of crossword; let i = index">
     <span *ngFor="let element of row; let j = index">
         <span [id]="[i,j]">{{ element }}</span>
     </span>
 </div>
-<button mat-raised-button color="primary" (click)="initializeCrossword()">Generate random crossword</button>
+<button mat-raised-button color="primary" (click)="initializeCrossword()">Generate random crossword</button>&nbsp;&nbsp;
 <button mat-raised-button color="primary" (click)="solve()">Solve</button>
