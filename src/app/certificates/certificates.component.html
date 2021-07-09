@@ -1,6 +1,6 @@
 <div class="row margin-top pos-center" *ngFor="let certificate of certificates">
     <div class="col-md-4 col-sm-4 margin-left-right">
-        <mat-card class="certificate-card">
+        <mat-card class="max-card-width">
             <mat-card-header>
                 <div mat-card-avatar class="certificate-header-image"></div>
                 <mat-card-title>{{ certificate[0].title }}</mat-card-title>
@@ -14,7 +14,7 @@
         </mat-card>
     </div>
     <div class="col-md-4 col-sm-4 margin-left-right">
-        <mat-card class="certificate-card">
+        <mat-card class="max-card-width">
             <mat-card-header>
                 <div mat-card-avatar class="certificate-header-image"></div>
                 <mat-card-title>{{ certificate[1].title }}</mat-card-title>
