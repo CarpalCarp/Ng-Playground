@@ -2,17 +2,22 @@ main{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 80%;
 }
 
 main > div> h1{
     text-align: center;
 }
 
-main > p{
-    margin-top: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
+/* wrapper div around p tag */
+main div:nth-child(2){
+    margin: 30px;
+    overflow-x: scroll;
+    max-height: 100px;
+}
+
+/* second wrapper div in main */
+main div:nth-child(2) > p{
+    padding: 5px;
 }
 
 img{
