@@ -12,7 +12,7 @@ export class HeaderComponent {
     {
       label: 'About Me',
       icon: 'account_box',
-      route: '/about-me',
+      route: '/',
       showOnMobile: true,
       showOnTablet: true,
       showOnDesktop: true

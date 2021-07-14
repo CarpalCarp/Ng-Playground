@@ -7,7 +7,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { CodingChallengesComponent } from './coding-challenges/coding-challenges.component';
 
 const routes: Routes = [
-  { path: 'about-me', component: AboutMeComponent },
+  { path: '', component: AboutMeComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'certificates', component: CertificatesComponent },
   { path: 'coding-challenges', component: CodingChallengesComponent },
