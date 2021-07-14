@@ -1,0 +1,35 @@
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 80%;
+}
+
+main > div> h1{
+    text-align: center;
+}
+
+main > p{
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+img{
+    max-width: 300px;
+    max-height: 450px;
+    border-radius: 30px;
+}
+
+.me-card-medium{
+    max-width: 300px;
+    max-height: 700px;
+}
+
+.container{
+    display: block;
+    height: 500px;
+    width: 500px;
+    padding: 2em;
+}
+

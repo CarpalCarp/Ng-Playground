@@ -1,1 +1,25 @@
-<p>about-me works!</p>
+<mat-grid-list cols="4" rowHeight="700px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        <main *ngIf="tile.title === 'Summary'">
+            <div>
+                <h1>Matias Galante</h1>
+                <img src="../../assets/about-me/MatiasPicture.jpg" alt="Matias">
+            </div>
+            <p>{{ tile.content }}</p>
+            <a mat-raised-button color="primary" target="_blank"
+                href="https://www.linkedin.com/in/matias-galante-20bbb4161">
+                LinkedIn
+            </a>&nbsp;&nbsp;
+            <a mat-raised-button color="primary" target="_blank" href="https://github.com/CarpalCarp?tab=repositories">
+                GitHub
+            </a>&nbsp;&nbsp;
+            <a mat-raised-button color="primary" target="_blank">
+                <mat-icon class="mr">mail</mat-icon>
+            </a>
+        </main>
+        <section *ngIf="tile.title === 'Carousel'" class="container">
+            <app-carousel [slides]="slides"></app-carousel>
+        </section>
+    </mat-grid-tile>
+</mat-grid-list>

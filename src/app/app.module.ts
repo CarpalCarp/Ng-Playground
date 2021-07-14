@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AboutMeComponent } from './about-me/about-me.component';
@@ -31,6 +32,7 @@ import { DirectionsComponent } from './coding-challenges/directions/directions.c
 import { ToDoListComponent } from './coding-challenges/to-do-list/to-do-list.component';
 import { ToDoComponent } from './coding-challenges/to-do-list/to-do/to-do.component';
 import { CrosswordComponent } from './coding-challenges/crossword/crossword.component';
+import { CarouselComponent } from './about-me/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { CrosswordComponent } from './coding-challenges/crossword/crossword.comp
     DirectionsComponent,
     ToDoListComponent,
     ToDoComponent,
-    CrosswordComponent
+    CrosswordComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { CrosswordComponent } from './coding-challenges/crossword/crossword.comp
     MatDividerModule,
     FlexLayoutModule,
     AppRoutingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
