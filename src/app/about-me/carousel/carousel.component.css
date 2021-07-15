@@ -47,11 +47,11 @@
 
 .next{
     right: 0;
-    transform: rotate(45deg);
+    transform: rotate(225deg);
 }
 .prev{
     left: 0;
-    transform: rotate(225deg);
+    transform: rotate(45deg);
 }
 
 .arrow{
