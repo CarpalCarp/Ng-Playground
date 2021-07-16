@@ -26,9 +26,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    this.intervalId = setInterval(() => {
+    /*this.intervalId = setInterval(() => {
       this.onNextClick();
-    }, 5000);
+    }, 5000);*/
   }
 
   ngOnDestroy() {

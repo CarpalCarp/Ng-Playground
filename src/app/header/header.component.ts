@@ -21,7 +21,7 @@ export class HeaderComponent {
       label: 'Projects',
       icon: 'assignment_turned_in',
       route: '/projects',
-      showOnMobile: true,
+      showOnMobile: false,
       showOnTablet: true,
       showOnDesktop: true
     },

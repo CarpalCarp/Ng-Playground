@@ -1,0 +1,39 @@
+/*#adventure{
+    max-width: 400px;
+}*/
+
+nav, aside{
+    background-color: green;
+}
+
+section{
+    background-color: yellow;
+}
+
+nav, section{
+    padding: 10px;
+}
+
+textarea{
+    resize: none;
+}
+
+aside{
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 360px;
+    gap: 10px;
+    padding: 10px;
+    font-family: Consolas;
+}
+
+.nozone{
+    background-color: black;
+    min-width: 60px;
+    min-height: 60px;
+}
+
+.player{
+    position: absolute;
+    left: 150px;
+}

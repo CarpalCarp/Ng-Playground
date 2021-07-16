@@ -7,3 +7,8 @@
 .cardSize{
     min-width:324px;
 }
+
+.treasure-hunt-size{
+    min-width: 400px;
+    min-height: 500px;
+}

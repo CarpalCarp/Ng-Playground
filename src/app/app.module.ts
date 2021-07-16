@@ -33,6 +33,7 @@ import { ToDoListComponent } from './coding-challenges/to-do-list/to-do-list.com
 import { ToDoComponent } from './coding-challenges/to-do-list/to-do/to-do.component';
 import { CrosswordComponent } from './coding-challenges/crossword/crossword.component';
 import { CarouselComponent } from './about-me/carousel/carousel.component';
+import { TreasureHuntComponent } from './coding-challenges/treasure-hunt/treasure-hunt.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CarouselComponent } from './about-me/carousel/carousel.component';
     ToDoListComponent,
     ToDoComponent,
     CrosswordComponent,
-    CarouselComponent
+    CarouselComponent,
+    TreasureHuntComponent
   ],
   imports: [
     BrowserModule,

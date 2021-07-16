@@ -1,7 +1,7 @@
 <div class="carousel">
-    <ng-container *ngFor="let slide of slides; let i = index">
+    <div *ngFor="let slide of slides; let i = index">
         <img @carouselAnimation [src]="slide.src" class="slide" *ngIf="i === currentSlide">
-    </ng-container>
+    </div>
 
     <button class="control prev" (click)="onPreviousClick()">
         <span class="arrow"></span>

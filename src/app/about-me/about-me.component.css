@@ -4,20 +4,20 @@ main{
     justify-content: center;
 }
 
-main > div> h1{
-    text-align: center;
+section{
+    max-width: 80%;
 }
 
 /* wrapper div around p tag */
-main div:nth-child(2){
+main div{
     margin: 30px;
-    overflow-x: scroll;
-    max-height: 100px;
+    max-width: 80%;
+    text-align: center;
 }
 
-/* second wrapper div in main */
-main div:nth-child(2) > p{
-    padding: 5px;
+main > div > p{
+    padding: 10px;
+    text-align: left;
 }
 
 img{
