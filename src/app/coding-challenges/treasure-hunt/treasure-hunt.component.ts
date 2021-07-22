@@ -68,7 +68,7 @@ export class TreasureHuntComponent implements OnInit {
     this.gameMap.initializeMap();
 
     while (lineNo < (2 + totalRows)) { // read over map character data 
-      if (mapMetaData[lineNo].length !== totalColumns) {
+      if (mapMetaData[lineNo].length !== totalColumns + 1) {
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
       }
@@ -107,7 +107,6 @@ export class TreasureHuntComponent implements OnInit {
     let miniMapCol = 0;
     for (let row = startingRow; row < startingRow + this.gameMap.miniMapSize; row++) {
       for (let col = startingCol; col < startingCol + this.gameMap.miniMapSize; col++) {
-        console.log(this.getMiniMapImg(this.gameMap.map[row][col]));
         this.miniMap[miniMapRow][miniMapCol] = this.getMiniMapImg(this.gameMap.map[row][col])!;
         miniMapCol++;
       }
