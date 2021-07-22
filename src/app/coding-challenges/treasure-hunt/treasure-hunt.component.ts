@@ -58,7 +58,6 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   private parseMapFile(mapMetaData: string[]) {
-    console.log(mapMetaData);
     let lineNo = 0; // keeps track of line number in file
     this.mapItemName = mapMetaData[0]; // map name is at line 1
     lineNo++;
@@ -70,6 +69,7 @@ export class TreasureHuntComponent implements OnInit {
 
     while (lineNo < (2 + totalRows)) { // read over map character data 
       if (mapMetaData[lineNo].length !== totalColumns + 1) {
+        console.log(mapMetaData);
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
       }
