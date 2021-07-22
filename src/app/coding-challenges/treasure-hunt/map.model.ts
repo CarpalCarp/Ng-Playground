@@ -1,14 +1,14 @@
 import { Terrain } from './terrain.model';
 
-export class Map {
+export class GameMap {
     private MINI_MAP_SIZE: number = 5;
+    private MAP_EDGE = 3;
     public map: string[][]; // double array used to travel through "map" in game
 
-    private imageHeight: number = 0; // holds image height
-    private imageWidth: number = 0; // holds image width
     private itemFileName: string = ''; // holds the name of the text that that tells which items are present on the map
     private mapHeight: number = 0;
     private mapWidth: number = 0;
+    public CharToImg: Map<string, string>;
 
     public plain: Terrain;
     public mountain: Terrain;
@@ -20,9 +20,11 @@ export class Map {
 
     constructor(private totalRows: number, private totalCols: number) {
         this.map = new Array(totalRows);
-        for (let i = 0; i < totalCols - 2; i++) {
+        for (let i = 0; i < totalRows; i++) {
             this.map[i] = new Array(totalCols);
         }
+
+        this.CharToImg = new Map([]);
 
         this.plain = new Terrain('', '', '');
         this.mountain = new Terrain('', '', '');
@@ -31,6 +33,14 @@ export class Map {
         this.treasure = new Terrain('', '', '');
         this.out = new Terrain('', '', '');
         this.person = new Terrain('', '', '');
+    }
+
+    public getSouthEdge() {
+        return this.totalRows - this.MAP_EDGE;
+    }
+
+    public getEastEdge() {
+        return this.totalCols - this.MAP_EDGE;
     }
 
     public display() {
@@ -46,20 +56,25 @@ export class Map {
         console.log(this.person);
     }
 
-    // will initialize outer boundary with X's, this is the area the player can't travel to and it needs to be more than 1 layer thick
+    // will initialize outer boundary with -'s, this is the area the player can't travel to and it needs to be more than 1 layer thick
     public initializeMap() {
-        for (let row = 0; row <= this.totalRows; row++) {
+        for (let row = 0; row < this.totalRows; row++) {
             for (let col = 0; col < this.totalCols; col++) {
-                if (row == 0 || row == 1 || row == this.totalRows || row == this.totalRows - 1 || col == 1 || col == 0 || col == this.totalCols - 1 || col == this.totalCols - 2)
-                    this.map[row][col] = 'X';
+                if (row === 0 || row === 1 || row === this.totalRows - 1 || row === this.totalRows - 2 || col === 0 || col === 1 || col === this.totalCols - 1 || col === this.totalCols - 2)
+                    this.map[row][col] = '-';
             }
         }
     }
 
     // fillMap() fills up the map according to the characters from the file
     public fillMap(buffer: string, row: number) {
-        for (let col = 2; col < this.totalCols - 2; col++) {
-            this.map[row][col] = buffer[col - 2]; // place each character from file on the map inside the X parameter
+        let indexToBuffer = 0;
+        for (let col = 0; col < this.totalCols - 0; col++) {
+            // don't set characters in the first and last two columns which are out of bounds
+            if (col > 1 && col < this.totalCols - 2) {
+                this.map[row][col] = buffer[indexToBuffer]; // place each character from file on the map inside the '-' parameter
+                indexToBuffer++;
+            }
         }
     }
 
@@ -75,7 +90,7 @@ export class Map {
         return this.MINI_MAP_SIZE;
     }
 
-    public initializeMapItems(buffer: string[]) {
+    public initializeMapTerrain(buffer: string[]) {
         let terrainName = buffer[1].toLowerCase();
         switch (terrainName) {
             case "mountain":
@@ -100,8 +115,17 @@ export class Map {
                 this.person = new Terrain(buffer[0], terrainName, buffer[2]);
                 break;
             default:
-                // TODO throw error here
                 break;
         }
+    }
+
+    public setCharToImageObj() {
+        this.CharToImg.set(this.mountain.terrainChar, this.mountain.terrainImage);
+        this.CharToImg.set(this.out.terrainChar, this.out.terrainImage);
+        this.CharToImg.set(this.person.terrainChar, this.person.terrainImage);
+        this.CharToImg.set(this.plain.terrainChar, this.plain.terrainImage);
+        this.CharToImg.set(this.treasure.terrainChar, this.treasure.terrainImage);
+        this.CharToImg.set(this.water.terrainChar, this.water.terrainImage);
+        this.CharToImg.set(this.forest.terrainChar, this.forest.terrainImage);
     }
 }

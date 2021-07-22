@@ -1,25 +1,30 @@
 <div id="adventure">
     <nav class="row">
-        <button>Open</button>&nbsp;
-        <button>Save</button>&nbsp;
-        <button>Quit</button>&nbsp;
+        <button (click)="restart()">Restart</button>
     </nav>
     <div class="row">
-        <main class="col-md-6">
-            <textarea name="console" id="" cols="70" rows="18"></textarea>
+        <main class="col-md-6 col-sm-12">
+            <textarea name="console" id="" cols="40" rows="14" readonly [(ngModel)]="gameConsole.textArea"></textarea>
         </main>
-        <aside class="col-md-6" *ngFor="let row of miniMap; let i = index">
-            <div *ngFor="let terrain of row; let j = index">
-                <img *ngIf="terrain !== 'X'; else elseBlock" src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain}}">
-                <img class="player" *ngIf="i === 2 && j === 2" src="./assets/treasure-hunt/{{getPlayerImg()}}" alt="">
-                <ng-template #elseBlock>
-                    <div class="nozone">NOZONE</div>
-                </ng-template>
+        <div class="col-md-6 col-sm-12">
+            <div id="map-border">
+                <aside *ngFor="let row of miniMap; let i = index">
+                    <div *ngFor="let terrain of row; let j = index">
+                        <img *ngIf="terrain !== '-'; else elseBlock" src="./assets/treasure-hunt/{{terrain}}"
+                            alt="{{terrain}}" height="60px" width="60px">
+                        <img class="player" *ngIf="(i === 2 && j === 2) && player != undefined" src="{{getPlayerImg()}}"
+                            alt="{{getPlayerImg()}}" height="60px" width="60px">
+                        <ng-template #elseBlock>
+                            <img src="{{getDefaultImage()}}" height="60px" width="60px">
+                        </ng-template>
+                    </div>
+                </aside>
             </div>
-        </aside>
+        </div>
     </div>
     <section class="row">
         <label for="commands">Command Input</label>&nbsp;
-        <input name="commands" type="text">
+        <input name="commands" type="text" #command>&nbsp;
+        <button (click)="parseCommands(command)">Enter</button>
     </section>
 </div>

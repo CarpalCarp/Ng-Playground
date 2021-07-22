@@ -1,6 +1,5 @@
 map1items.txt
 10 12
-60 60
 ~~~~....MMMM
 ~~~....MMMM.
 ~~...MMMMMMM
