@@ -58,6 +58,7 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   private parseMapFile(mapMetaData: string[]) {
+    console.log(mapMetaData);
     let lineNo = 0; // keeps track of line number in file
     this.mapItemName = mapMetaData[0]; // map name is at line 1
     lineNo++;
