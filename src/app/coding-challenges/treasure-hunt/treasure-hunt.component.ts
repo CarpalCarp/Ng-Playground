@@ -31,8 +31,8 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.readMapFile('../../../assets/treasure-hunt/map-files/map1.txt');
-    this.readItemFile('../../../assets/treasure-hunt/map-files/map1items.txt');
+    this.readMapFile('dist/playground/assets/treasure-hunt/map-files/map1.txt');
+    this.readItemFile('dist/playground/assets/treasure-hunt/map-files/map1items.txt');
   }
 
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
@@ -58,7 +58,6 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   private parseMapFile(mapMetaData: string[]) {
-    console.log(mapMetaData);
     let lineNo = 0; // keeps track of line number in file
     this.mapItemName = mapMetaData[0]; // map name is at line 1
     lineNo++;
