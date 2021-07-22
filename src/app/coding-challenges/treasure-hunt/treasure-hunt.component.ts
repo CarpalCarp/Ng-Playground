@@ -68,7 +68,7 @@ export class TreasureHuntComponent implements OnInit {
     this.gameMap.initializeMap();
 
     while (lineNo < (2 + totalRows)) { // read over map character data 
-      if (mapMetaData[lineNo].length !== totalColumns + 1) {
+      if (mapMetaData[lineNo].length !== totalColumns) {
         console.log(mapMetaData);
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
