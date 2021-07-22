@@ -31,8 +31,8 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.readMapFile('dist/playground/assets/treasure-hunt/map-files/map1.txt');
-    this.readItemFile('dist/playground/assets/treasure-hunt/map-files/map1items.txt');
+    this.readMapFile('./assets/treasure-hunt/map-files/map1.txt');
+    this.readItemFile('./assets/treasure-hunt/map-files/map1items.txt');
   }
 
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
@@ -69,6 +69,7 @@ export class TreasureHuntComponent implements OnInit {
 
     while (lineNo < (2 + totalRows)) { // read over map character data 
       if (mapMetaData[lineNo].length !== totalColumns + 1) {
+        console.log(mapMetaData);
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
       }
