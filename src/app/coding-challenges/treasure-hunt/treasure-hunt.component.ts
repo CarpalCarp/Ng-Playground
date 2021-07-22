@@ -31,8 +31,8 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.readMapFile('dist/playground/assets/treasure-hunt/map-files/map1.txt');
-    this.readItemFile('dist/playground/assets/treasure-hunt/map-files/map1items.txt');
+    this.readMapFile('/dist/playground/assets/treasure-hunt/map-files/map1.txt');
+    this.readItemFile('/dist/playground/assets/treasure-hunt/map-files/map1items.txt');
   }
 
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
