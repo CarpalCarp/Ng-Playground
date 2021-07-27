@@ -10,10 +10,17 @@ import { GameConsole } from './game-console.model';
 })
 export class TreasureHuntComponent implements OnInit {
   public gameConsole: GameConsole;
-  private mapItemName: string = '';
+  private mapItemName: string;
   private gameMap: GameMap;
   public player: GameChar;
   public miniMap: string[][];
+  public charToCommand: { [index: string]: (valueTwo: string, gameConsole: GameConsole) => void } = {
+    g: (valueTwo: string, gameConsole: GameConsole) => this.go(valueTwo, gameConsole),
+    t: (valueTwo: string, gameConsole: GameConsole) => this.player.takeItem(valueTwo, gameConsole),
+    d: (valueTwo: string, gameConsole: GameConsole) => this.player.dropItem(valueTwo, gameConsole),
+    i: (valueTwo: string, gameConsole: GameConsole) => this.player.displayInventory(valueTwo, gameConsole),
+    h: (valueTwo: string, gameConsole: GameConsole) => this.help(valueTwo, gameConsole)
+  };
 
   constructor() {
     this.miniMap = [
@@ -28,6 +35,7 @@ export class TreasureHuntComponent implements OnInit {
     };
     this.gameMap = new GameMap(0, 0);
     this.player = new GameChar();
+    this.mapItemName = '';
   }
 
   ngOnInit() {
@@ -139,7 +147,15 @@ export class TreasureHuntComponent implements OnInit {
     let valueTwo = inputList.slice(1).join(' '); // valueTwo is everything that comes after valueOne
     if (this.player.itemInLocation !== '' && valueTwo === '')
       valueTwo = this.player.itemInLocation;
-    switch (valueOne.charAt(0)) {
+
+    // elsewhere
+    if (!valueTwo || !(valueTwo[0] in this.charToCommand)) {
+      this.gameConsole.textArea += ''; // display error message
+    } else {
+      this.charToCommand[valueTwo[0]](valueTwo, this.gameConsole)
+    }
+    //this.charToCommand[valueOne[0]](valueOne, this.gameConsole);
+    /*switch (valueOne.charAt(0)) {
       case 'g': // abreviated command for "go"
         this.go(valueTwo);
         break;
@@ -158,17 +174,17 @@ export class TreasureHuntComponent implements OnInit {
       default:
         this.gameConsole.textArea += `'${valueOne}' command is not supported in game.\n`;
         break;
-    }
+    }*/
   }
 
-  public go(direction: string) {
+  public go(direction: string, gameConsole: GameConsole) {
     this.gameConsole.textArea += this.player.move(direction, this.gameMap); // move
     this.gameConsole.textArea += this.player.displayLocation(this.gameMap); // display location
     this.setMiniMap()// update mini map
     this.player.searchForItems(this.gameConsole);// search for items
   }
 
-  public help() {
+  public help(valueTwo: string, gameConsole: GameConsole) {
     this.gameConsole.textArea += `// Game controls //\ngo <direction> //\nmoves character around\ntake <item name> // take an item, including the item name is optional\ndrop <item> // drop an item from inventory\ninventory // show items in inventory`;
   }
 }

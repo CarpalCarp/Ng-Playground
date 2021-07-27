@@ -146,7 +146,7 @@ export class GameChar {
         return -1;
     }
 
-    public displayInventory(gameConsole: GameConsole) {
+    public displayInventory(valueTwo: string, gameConsole: GameConsole) {
         gameConsole.textArea += "Inventory:\n";
         if (this.inventory.length === 0)
             gameConsole.textArea += "Empty\n";
