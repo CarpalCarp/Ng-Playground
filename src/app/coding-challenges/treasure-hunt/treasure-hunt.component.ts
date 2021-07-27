@@ -149,32 +149,11 @@ export class TreasureHuntComponent implements OnInit {
       valueTwo = this.player.itemInLocation;
 
     // elsewhere
-    if (!valueTwo || !(valueTwo[0] in this.charToCommand)) {
+    if (!valueOne || !(valueOne[0] in this.charToCommand)) {
       this.gameConsole.textArea += ''; // display error message
     } else {
-      this.charToCommand[valueTwo[0]](valueTwo, this.gameConsole)
+      this.charToCommand[valueOne[0]](valueTwo, this.gameConsole)
     }
-    //this.charToCommand[valueOne[0]](valueOne, this.gameConsole);
-    /*switch (valueOne.charAt(0)) {
-      case 'g': // abreviated command for "go"
-        this.go(valueTwo);
-        break;
-      case 't': // abbreviated command for "take"
-        this.player.takeItem(valueTwo, this.gameConsole);
-        break;
-      case 'd': // abbreviated command for "drop"
-        this.player.dropItem(valueTwo, this.gameConsole);
-        break;
-      case 'i': // abbreviated command for "inventory"
-        this.player.displayInventory(this.gameConsole);
-        break;
-      case 'h': // abbreviated command for "help"
-        this.help();
-        break;
-      default:
-        this.gameConsole.textArea += `'${valueOne}' command is not supported in game.\n`;
-        break;
-    }*/
   }
 
   public go(direction: string, gameConsole: GameConsole) {
