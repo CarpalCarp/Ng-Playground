@@ -151,9 +151,8 @@ export class GameChar {
         if (this.inventory.length === 0)
             gameConsole.textArea += "Empty\n";
         else {
-            for (let item of this.inventory) {
+            for (let item of this.inventory)
                 gameConsole.textArea += `${item.name}\n`;
-            }
         }
     }
 }

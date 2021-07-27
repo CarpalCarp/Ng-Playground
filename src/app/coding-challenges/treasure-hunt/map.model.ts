@@ -43,19 +43,6 @@ export class GameMap {
         return this.totalCols - this.MAP_EDGE;
     }
 
-    public display() {
-        console.log(this.map);
-        console.log('Map height: ' + this.mapHeight);
-        console.log('Map width: ' + this.mapWidth);
-        console.log(this.plain);
-        console.log(this.mountain);
-        console.log(this.forest);
-        console.log(this.water);
-        console.log(this.treasure);
-        console.log(this.out);
-        console.log(this.person);
-    }
-
     // will initialize outer boundary with -'s, this is the area the player can't travel to and it needs to be more than 1 layer thick
     public initializeMap() {
         for (let row = 0; row < this.totalRows; row++) {

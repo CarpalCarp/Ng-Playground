@@ -24,7 +24,10 @@ export class TreasureHuntComponent implements OnInit {
       ['-', '-', '-', '-', '-'],
     ];
     this.gameConsole = {
-      textArea: ''
+      textArea: `Enter
+      help
+      for list of commands
+      `
     };
     this.gameMap = new GameMap(0, 0);
     this.player = new GameChar();
@@ -69,7 +72,6 @@ export class TreasureHuntComponent implements OnInit {
 
     while (lineNo < (2 + totalRows)) { // read over map character data 
       if (mapMetaData[lineNo].length !== totalColumns) {
-        console.log(mapMetaData);
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
       }
@@ -91,14 +93,14 @@ export class TreasureHuntComponent implements OnInit {
     }
   }
 
+  private getMetaData(text: string) {
+    return text.split('\n');
+  }
+
   public restart() {
     this.gameConsole.textArea = '';
     this.player.restartPlayerLocation();
     this.setMiniMap()// update mini map
-  }
-
-  private getMetaData(text: string) {
-    return text.split('\n');
   }
 
   public setMiniMap() {
@@ -153,6 +155,9 @@ export class TreasureHuntComponent implements OnInit {
       case 'i': // abbreviated command for "inventory"
         this.player.displayInventory(this.gameConsole);
         break;
+      case 'h': // abbreviated command for "help"
+        this.help();
+        break;
       default:
         this.gameConsole.textArea += `'${valueOne}' command is not supported in game.\n`;
         break;
@@ -164,5 +169,16 @@ export class TreasureHuntComponent implements OnInit {
     this.gameConsole.textArea += this.player.displayLocation(this.gameMap); // display location
     this.setMiniMap()// update mini map
     this.player.searchForItems(this.gameConsole);// search for items
+  }
+
+  public help() {
+    this.gameConsole.textArea += `
+      // Game controls //
+      go <direction> // moves character around
+      take <item name> // take an item, including the item name is optional
+      drop <item> // drop an item from inventory
+      inventory // show items in inventory
+
+    `;
   }
 }
