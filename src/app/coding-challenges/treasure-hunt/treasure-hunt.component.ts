@@ -24,10 +24,7 @@ export class TreasureHuntComponent implements OnInit {
       ['-', '-', '-', '-', '-'],
     ];
     this.gameConsole = {
-      textArea: `Enter
-      help
-      for list of commands
-      `
+      textArea: `Enter\nhelp\nfor list of commands\n`
     };
     this.gameMap = new GameMap(0, 0);
     this.player = new GameChar();
@@ -172,13 +169,6 @@ export class TreasureHuntComponent implements OnInit {
   }
 
   public help() {
-    this.gameConsole.textArea += `
-      // Game controls //
-      go <direction> // moves character around
-      take <item name> // take an item, including the item name is optional
-      drop <item> // drop an item from inventory
-      inventory // show items in inventory
-
-    `;
+    this.gameConsole.textArea += `// Game controls //\ngo <direction> //\nmoves character around\ntake <item name> // take an item, including the item name is optional\ndrop <item> // drop an item from inventory\ninventory // show items in inventory`;
   }
 }
