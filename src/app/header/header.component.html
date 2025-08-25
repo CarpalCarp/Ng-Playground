@@ -1,7 +1,6 @@
-<mat-toolbar fxLayout="row" color="primary">
+<mat-toolbar color="primary">
     <span fxFlex>Matias Galante</span>
-    <button [routerLink]="item.route" mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop"
-        [fxShow.xs]="item.showOnMobile" [fxShow.sm]="item.showOnTablet">
+    <button [routerLink]="item.route" mat-button *ngFor="let item of menuItems">
         <mat-icon class="mr">{{item.icon}}</mat-icon>
         {{item.label}}
     </button>
@@ -11,7 +10,7 @@
         </button>
         <mat-menu #dropMenu="matMenu">
             <ng-container *ngFor="let item of menuItems">
-                <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet" [fxShow.xs]="!item.showOnMobile">
+                <div>
                     <button [routerLink]="item.route" mat-menu-item>
                         <mat-icon class="mr">{{item.icon}}</mat-icon>
                         {{item.label}}

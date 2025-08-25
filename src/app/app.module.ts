@@ -6,18 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 
-import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AboutMeComponent } from './about-me/about-me.component';
@@ -58,19 +55,16 @@ import { TreasureHuntComponent } from './coding-challenges/treasure-hunt/treasur
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatListModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
     MatCardModule,
+    MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatMenuModule,
     MatDividerModule,
-    FlexLayoutModule,
     AppRoutingModule,
+    MatGridListModule,
+    MatMenuModule,
     MatFormFieldModule,
-    MatGridListModule
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
