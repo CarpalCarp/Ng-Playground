@@ -2,9 +2,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Certificate } from './certificate.model';
 
 @Component({
-  selector: 'app-certificates',
-  templateUrl: './certificates.component.html',
-  styleUrls: ['../shared-styles/card-styles.component.css']
+    selector: 'app-certificates',
+    templateUrl: './certificates.component.html',
+    styleUrls: ['../shared-styles/card-styles.component.css'],
+    standalone: false
 })
 export class CertificatesComponent {
   public certificates = [

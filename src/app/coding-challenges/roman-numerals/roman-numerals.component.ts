@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'roman-numerals',
-  templateUrl: './roman-numerals.component.html',
-  styleUrls: ['./roman-numerals.component.css']
+    selector: 'roman-numerals',
+    templateUrl: './roman-numerals.component.html',
+    styleUrls: ['./roman-numerals.component.css'],
+    standalone: false
 })
 export class RomanNumeralsComponent {
   @Input() title: string = '';

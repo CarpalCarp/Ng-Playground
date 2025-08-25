@@ -13,9 +13,10 @@ interface CWMetaData {
 }
 
 @Component({
-  selector: 'crossword',
-  templateUrl: './crossword.component.html',
-  styleUrls: ['./crossword.component.css']
+    selector: 'crossword',
+    templateUrl: './crossword.component.html',
+    styleUrls: ['./crossword.component.css'],
+    standalone: false
 })
 export class CrosswordComponent {
   @Input() title: string = '';

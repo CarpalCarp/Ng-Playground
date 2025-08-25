@@ -4,9 +4,10 @@ import { GameMap } from './map.model';
 import { GameConsole } from './game-console.model';
 
 @Component({
-  selector: 'app-treasure-hunt',
-  templateUrl: './treasure-hunt.component.html',
-  styleUrls: ['./treasure-hunt.component.css']
+    selector: 'app-treasure-hunt',
+    templateUrl: './treasure-hunt.component.html',
+    styleUrls: ['./treasure-hunt.component.css'],
+    standalone: false
 })
 export class TreasureHuntComponent implements OnInit {
   public gameConsole: GameConsole;

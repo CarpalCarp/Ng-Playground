@@ -6,9 +6,10 @@ interface RemovedObj {
 }
 
 @Component({
-  selector: 'to-do',
-  templateUrl: './to-do.component.html',
-  styleUrls: ['./to-do.component.css']
+    selector: 'to-do',
+    templateUrl: './to-do.component.html',
+    styleUrls: ['./to-do.component.css'],
+    standalone: false
 })
 
 export class ToDoComponent {

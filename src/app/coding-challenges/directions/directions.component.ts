@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'directions',
-  templateUrl: './directions.component.html',
-  styleUrls: ['./directions.component.css']
+    selector: 'directions',
+    templateUrl: './directions.component.html',
+    styleUrls: ['./directions.component.css'],
+    standalone: false
 })
 export class DirectionsComponent {
   @Input() title: string = "";

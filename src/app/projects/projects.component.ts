@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Project } from './project.model';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['../shared-styles/card-styles.component.css']
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['../shared-styles/card-styles.component.css'],
+    standalone: false
 })
 export class ProjectsComponent {
   public projects = [

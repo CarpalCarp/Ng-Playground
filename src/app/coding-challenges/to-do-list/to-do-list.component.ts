@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'to-do-list',
-  templateUrl: './to-do-list.component.html',
-  styleUrls: ['./to-do-list.component.css']
+    selector: 'to-do-list',
+    templateUrl: './to-do-list.component.html',
+    styleUrls: ['./to-do-list.component.css'],
+    standalone: false
 })
 export class ToDoListComponent {
   @Input() title: string = '';

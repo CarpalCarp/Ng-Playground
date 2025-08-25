@@ -3,20 +3,21 @@ import { Slide } from '../slide.model';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css'],
-  animations: [
-    trigger('carouselAnimation', [
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 }))
-      ]),
-      transition('* => void', [
-        animate('300ms', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    selector: 'app-carousel',
+    templateUrl: './carousel.component.html',
+    styleUrls: ['./carousel.component.css'],
+    animations: [
+        trigger('carouselAnimation', [
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate('300ms', style({ opacity: 1 }))
+            ]),
+            transition('* => void', [
+                animate('300ms', style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   @Input() slides: Slide[] = [];

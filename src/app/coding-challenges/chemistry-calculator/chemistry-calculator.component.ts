@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'chemistry-calculator',
-  templateUrl: './chemistry-calculator.component.html',
-  styleUrls: ['./chemistry-calculator.component.css']
+    selector: 'chemistry-calculator',
+    templateUrl: './chemistry-calculator.component.html',
+    styleUrls: ['./chemistry-calculator.component.css'],
+    standalone: false
 })
 export class ChemistryCalculatorComponent {
   @Input() title: string = '';
