@@ -1,19 +1,24 @@
-<div class="row" *ngFor="let tile of tiles">
-    <main class="col-md-12 col-sm-12" *ngIf="tile.title === 'Summary'">
-        <div>
-            <h1>Matias Galante</h1>
-            <img src="./assets/about-me/MatiasPicture.jpg" alt="Matias">
-            <p>{{ tile.content }}</p>
-            <a mat-raised-button color="primary" target="_blank"
-                href="https://www.linkedin.com/in/matias-galante-20bbb4161">
-                LinkedIn
-            </a>&nbsp;&nbsp;
-            <a mat-raised-button color="primary" target="_blank" href="https://github.com/CarpalCarp?tab=repositories">
-                GitHub
-            </a>
-        </div>
-    </main>
-    <section class="col-md-12 col-sm-12" *ngIf="tile.title === 'Carousel'" class="container">
-        <app-carousel [slides]="slides"></app-carousel>
-    </section>
+@for(tile of tiles; track tile.title) {
+<div class="row">
+  @if(tile.title === 'Summary') {
+  <main class="col-md-12 col-sm-12">
+    <div>
+      <h1>Matias Galante</h1>
+      <img src="./assets/about-me/MatiasPicture.jpg" alt="Matias">
+      <p>{{ tile.content }}</p>
+      <a mat-raised-button color="primary" target="_blank" href="https://www.linkedin.com/in/matias-galante-20bbb4161">
+        LinkedIn
+      </a>&nbsp;&nbsp;
+      <a mat-raised-button color="primary" target="_blank" href="https://github.com/CarpalCarp?tab=repositories">
+        GitHub
+      </a>
+    </div>
+  </main>
+  }
+  @if(tile.title === 'Carousel') {
+  <section class="col-md-12 col-sm-12" class="container">
+    <app-carousel [slides]="slides"></app-carousel>
+  </section>
+  }
 </div>
+}
