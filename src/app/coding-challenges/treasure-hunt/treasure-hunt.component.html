@@ -1,12 +1,12 @@
 <div id="adventure">
-    <nav class="row">
+    <nav>
         <button (click)="restart()">Restart</button>
     </nav>
-    <div class="row">
-        <main class="col-md-6 col-sm-12">
+    <div>
+        <main>
             <textarea name="console" id="" cols="40" rows="14" readonly [(ngModel)]="gameConsole.textArea"></textarea>
         </main>
-        <div class="col-md-6 col-sm-12">
+        <div>
             <div id="map-border">
                 <aside *ngFor="let row of miniMap; let i = index">
                     <div *ngFor="let terrain of row; let j = index">
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <section class="row">
+    <section>
         <label for="commands">Command Input</label>&nbsp;
         <input name="commands" type="text" #command>&nbsp;
         <button (click)="parseCommands(command)">Enter</button>

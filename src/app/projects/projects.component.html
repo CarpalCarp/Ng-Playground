@@ -1,6 +1,6 @@
-<div class="row margin-top pos-center flex-wrap" *ngFor="let project of projects">
-    <div class="col-md-4 col-sm-12  card-margin">
-        <mat-card class="max-card-width">
+<div *ngFor="let project of projects">
+    <div>
+        <mat-card>
             <mat-card-header>
                 <mat-card-title>{{ project[0].title }}</mat-card-title>
                 <mat-card-subtitle>{{ project[0].subtitle }}</mat-card-subtitle>
@@ -16,8 +16,8 @@
             </mat-card-actions>
         </mat-card>
     </div>
-    <div class="col-md-4 col-sm-12 card-margin">
-        <mat-card class="max-card-width">
+    <div>
+        <mat-card>
             <mat-card-header>
                 <mat-card-title>{{ project[1].title }}</mat-card-title>
                 <mat-card-subtitle>{{ project[1].subtitle }}</mat-card-subtitle>

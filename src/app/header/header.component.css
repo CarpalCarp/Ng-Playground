@@ -1,4 +1,5 @@
 button,
-button:hover {
+button:hover,
+button:focus {
   box-shadow: none;
 }
