@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -29,14 +27,12 @@ import { DirectionsComponent } from './coding-challenges/directions/directions.c
 import { ToDoListComponent } from './coding-challenges/to-do-list/to-do-list.component';
 import { ToDoComponent } from './coding-challenges/to-do-list/to-do/to-do.component';
 import { CrosswordComponent } from './coding-challenges/crossword/crossword.component';
-import { CarouselComponent } from './about-me/carousel/carousel.component';
 import { TreasureHuntComponent } from './coding-challenges/treasure-hunt/treasure-hunt.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
     ChemistryCalculatorComponent,
-    HeaderComponent,
     AboutMeComponent,
     ProjectsComponent,
     NotFoundComponent,
@@ -48,7 +44,6 @@ import { TreasureHuntComponent } from './coding-challenges/treasure-hunt/treasur
     ToDoListComponent,
     ToDoComponent,
     CrosswordComponent,
-    CarouselComponent,
     TreasureHuntComponent
   ],
   imports: [
