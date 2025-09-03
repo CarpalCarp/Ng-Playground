@@ -2,10 +2,10 @@ import { WinnerFound } from './winner-found';
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'tic-tac-toe',
-    templateUrl: './tic-tac-toe.component.html',
-    styleUrls: ['./tic-tac-toe.component.css'],
-    standalone: false
+  selector: 'tic-tac-toe',
+  templateUrl: './tic-tac-toe.component.html',
+  styleUrls: ['./tic-tac-toe.component.css'],
+  standalone: true
 })
 
 export class TicTacToeComponent {

@@ -5,7 +5,7 @@ import { Tile } from './tile.model';
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
   styleUrls: ['./about-me.component.css'],
-  standalone: false
+  standalone: true
 })
 export class AboutMeComponent {
   tiles: Tile[] = [

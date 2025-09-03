@@ -1,36 +1,17 @@
-<div *ngFor="let project of projects">
-    <div>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{ project[0].title }}</mat-card-title>
-                <mat-card-subtitle>{{ project[0].subtitle }}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="project[0].src" [alt]="project[0].title">
-            <mat-card-content>
-                <p>
-                    {{ project[0].description }}
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <a mat-button [href]="project[0].url" target="_blank">Go to {{ project[0].title }}</a>
-            </mat-card-actions>
-        </mat-card>
-    </div>
-    <div>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{ project[1].title }}</mat-card-title>
-                <mat-card-subtitle>{{ project[1].subtitle }}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="project[1].src" [alt]="project[1].title">
-            <mat-card-content>
-                <p>
-                    {{ project[1].description }}
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <a mat-button [href]="project[1].url" target="_blank">Go to {{ project[1].title }}</a>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+@for (project of projects; track project.title) {
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ project.title }}</mat-card-title>
+      <mat-card-subtitle>{{ project.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="project.src" [alt]="project.title">
+    <mat-card-content>
+      <p>{{ project.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button [href]="project.url" target="_blank">Go to {{ project.title }}</a>
+    </mat-card-actions>
+  </mat-card>
 </div>
+}

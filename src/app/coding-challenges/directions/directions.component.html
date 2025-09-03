@@ -17,6 +17,8 @@
 <div>
     <button mat-button color="primary" [disabled]="directions.length < 2" (click)="dirReduce()">Reduce</button>
 </div>
-<mat-list-item role="listitem" *ngFor="let direction of directions">
+@for (direction of directions; track direction) {
+<mat-list-item role="listitem">
     {{ direction }}
 </mat-list-item>
+}

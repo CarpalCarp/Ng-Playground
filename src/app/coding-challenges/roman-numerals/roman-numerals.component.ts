@@ -1,10 +1,20 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
-    selector: 'roman-numerals',
-    templateUrl: './roman-numerals.component.html',
-    styleUrls: ['./roman-numerals.component.css'],
-    standalone: false
+  selector: 'roman-numerals',
+  templateUrl: './roman-numerals.component.html',
+  styleUrls: ['./roman-numerals.component.css'],
+  imports: [
+    MatListModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule
+  ],
+  standalone: true
 })
 export class RomanNumeralsComponent {
   @Input() title: string = '';

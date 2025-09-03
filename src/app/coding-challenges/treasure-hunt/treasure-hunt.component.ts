@@ -1,27 +1,32 @@
 import { GameChar } from './game-char.model';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameMap } from './map.model';
 import { GameConsole } from './game-console.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-treasure-hunt',
-    templateUrl: './treasure-hunt.component.html',
-    styleUrls: ['./treasure-hunt.component.css'],
-    standalone: false
+  selector: 'app-treasure-hunt',
+  templateUrl: './treasure-hunt.component.html',
+  styleUrls: ['./treasure-hunt.component.css'],
+  imports: [
+    FormsModule,
+  ],
+  standalone: true
 })
 export class TreasureHuntComponent implements OnInit {
-  public gameConsole: GameConsole;
-  private mapItemName: string;
-  private gameMap: GameMap;
-  public player: GameChar;
-  public miniMap: string[][];
-  public charToCommand: { [index: string]: (valueTwo: string, gameConsole: GameConsole) => void } = {
+  gameConsole: GameConsole;
+  player: GameChar;
+  miniMap: string[][];
+  charToCommand: { [index: string]: (valueTwo: string, gameConsole: GameConsole) => void } = {
     g: (valueTwo: string, gameConsole: GameConsole) => this.go(valueTwo, gameConsole),
     t: (valueTwo: string, gameConsole: GameConsole) => this.player.takeItem(valueTwo, gameConsole),
     d: (valueTwo: string, gameConsole: GameConsole) => this.player.dropItem(valueTwo, gameConsole),
     i: (valueTwo: string, gameConsole: GameConsole) => this.player.displayInventory(valueTwo, gameConsole),
     h: (valueTwo: string, gameConsole: GameConsole) => this.help(valueTwo, gameConsole)
   };
+
+  private mapItemName: string;
+  private gameMap: GameMap;
 
   constructor() {
     this.miniMap = [

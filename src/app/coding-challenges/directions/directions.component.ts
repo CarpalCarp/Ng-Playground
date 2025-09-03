@@ -1,10 +1,16 @@
 import { Component, Input } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
-    selector: 'directions',
-    templateUrl: './directions.component.html',
-    styleUrls: ['./directions.component.css'],
-    standalone: false
+  selector: 'directions',
+  templateUrl: './directions.component.html',
+  styleUrls: ['./directions.component.css'],
+  imports: [
+    MatListModule,
+    MatFormFieldModule
+  ],
+  standalone: true
 })
 export class DirectionsComponent {
   @Input() title: string = "";

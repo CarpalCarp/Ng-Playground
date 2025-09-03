@@ -1,19 +1,27 @@
 <h3>{{ title }}</h3>
 <mat-form-field>
-    <mat-label>Enter compound</mat-label>
-    <input matInput type="text" [(ngModel)]="compound">
-    <button mat-button *ngIf="compound" matSuffix mat-icon-button aria-label="Clear" (click)="compound=''">
-        <mat-icon>close</mat-icon>
-    </button>
+  <mat-label>Enter compound</mat-label>
+  <input matInput type="text" [(ngModel)]="compound">
+  @if (compound) {
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="compound=''">
+    <mat-icon>close</mat-icon>
+  </button>
+  }
 </mat-form-field>
 <button mat-button color="primary" [disabled]="compound === ''" (click)="parseMolecule(compound)">Calculate</button>
 <h5>Example Compounds:</h5>
-<mat-list-item role="listitem" *ngFor="let compound of compoundExamples">
-    {{ compound }}
+@for (compound of compoundExamples; track compound) {
+<mat-list-item role="listitem">
+  {{ compound }}
 </mat-list-item>
-<mat-list role="list" *ngIf="ElementsArr.length > 0">
-    <h5>Elements:</h5>
-    <mat-list-item role="listitem" *ngFor="let property of ElementsArr">{{ property[0] }}: {{
-        property[1] }}
-    </mat-list-item>
+}
+@if (ElementsArr.length > 0) {
+<mat-list role="list">
+  <h5>Elements:</h5>
+  @for (property of ElementsArr; track property) {
+  <mat-list-item role="listitem">{{ property[0] }}: {{
+    property[1] }}
+  </mat-list-item>
+  }
 </mat-list>
+}

@@ -1,40 +1,39 @@
-main{
+main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-section{
-    max-width: 80%;
-}
-
 /* wrapper div around p tag */
-main div{
+main div {
     margin: 30px;
     max-width: 80%;
     text-align: center;
 }
 
-main > div > p{
+section {
+    max-width: 80%;
+}
+
+main>div>p {
     padding: 10px;
     text-align: left;
 }
 
-img{
+img {
     max-width: 300px;
     max-height: 450px;
     border-radius: 30px;
 }
 
-.me-card-medium{
+.me-card-medium {
     max-width: 300px;
     max-height: 700px;
 }
 
-.container{
+.container {
     display: block;
     height: 500px;
     width: 500px;
     padding: 2em;
 }
-

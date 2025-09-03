@@ -1,30 +1,36 @@
 <div id="adventure">
-    <nav>
-        <button (click)="restart()">Restart</button>
-    </nav>
+  <nav>
+    <button (click)="restart()">Restart</button>
+  </nav>
+  <div>
+    <main>
+      <textarea name="console" id="" cols="40" rows="14" readonly [(ngModel)]="gameConsole.textArea"></textarea>
+    </main>
     <div>
-        <main>
-            <textarea name="console" id="" cols="40" rows="14" readonly [(ngModel)]="gameConsole.textArea"></textarea>
-        </main>
-        <div>
-            <div id="map-border">
-                <aside *ngFor="let row of miniMap; let i = index">
-                    <div *ngFor="let terrain of row; let j = index">
-                        <img *ngIf="terrain !== '-'; else elseBlock" src="./assets/treasure-hunt/{{terrain}}"
-                            alt="{{terrain}}" height="60px" width="60px">
-                        <img class="player" *ngIf="(i === 2 && j === 2) && player != undefined" src="{{getPlayerImg()}}"
-                            alt="{{getPlayerImg()}}" height="60px" width="60px">
-                        <ng-template #elseBlock>
-                            <img src="{{getDefaultImage()}}" height="60px" width="60px">
-                        </ng-template>
-                    </div>
-                </aside>
-            </div>
-        </div>
+      <div id="map-border">
+        @for (row of miniMap; track row; let i = $index) {
+        <aside>
+          @for (terrain of row; track terrain; let j = $index) {
+          <div>
+            @if (terrain !== '-') {
+            <img src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain}}" height="60px" width="60px">
+            }
+            @else if ((i === 2 && j === 2) && player != undefined) {
+            <img class="player" src="{{getPlayerImg()}}" alt="{{getPlayerImg()}}" height="60px" width="60px">
+            }
+            @else {
+            <img src="{{getDefaultImage()}}" height="60px" width="60px">
+            }
+          </div>
+          }
+        </aside>
+        }
+      </div>
     </div>
-    <section>
-        <label for="commands">Command Input</label>&nbsp;
-        <input name="commands" type="text" #command>&nbsp;
-        <button (click)="parseCommands(command)">Enter</button>
-    </section>
+  </div>
+  <section>
+    <label for="commands">Command Input</label>&nbsp;
+    <input name="commands" type="text" #command>&nbsp;
+    <button (click)="parseCommands(command)">Enter</button>
+  </section>
 </div>

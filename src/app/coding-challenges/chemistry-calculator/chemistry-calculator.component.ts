@@ -1,10 +1,20 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
-    selector: 'chemistry-calculator',
-    templateUrl: './chemistry-calculator.component.html',
-    styleUrls: ['./chemistry-calculator.component.css'],
-    standalone: false
+  selector: 'chemistry-calculator',
+  templateUrl: './chemistry-calculator.component.html',
+  styleUrls: ['./chemistry-calculator.component.css'],
+  imports: [
+    MatListModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule
+  ],
+  standalone: true
 })
 export class ChemistryCalculatorComponent {
   @Input() title: string = '';
