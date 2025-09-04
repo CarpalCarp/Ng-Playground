@@ -1,14 +1,6 @@
-.center{
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
-}
+@import '../shared-styles/card-styles.component.css';
 
-.cardSize{
-    min-width:324px;
-}
-
-.treasure-hunt-size{
+.treasure-hunt-size {
     min-width: 400px;
     min-height: 500px;
 }
