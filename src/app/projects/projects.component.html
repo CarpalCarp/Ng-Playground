@@ -1,6 +1,6 @@
-@for (project of projects; track project.title) {
-<div>
-  <mat-card>
+<div class="card-container">
+  @for (project of projects; track project.title) {
+  <mat-card class="display-card" appearance="outlined">
     <mat-card-header>
       <mat-card-title>{{ project.title }}</mat-card-title>
       <mat-card-subtitle>{{ project.subtitle }}</mat-card-subtitle>
@@ -13,5 +13,5 @@
       <a mat-button [href]="project.url" target="_blank">Go to {{ project.title }}</a>
     </mat-card-actions>
   </mat-card>
+  }
 </div>
-}

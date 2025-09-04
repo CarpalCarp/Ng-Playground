@@ -6,7 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { CodingChallengesComponent } from './coding-challenges/coding-challenges.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: AboutMeComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'certificates', component: CertificatesComponent },
