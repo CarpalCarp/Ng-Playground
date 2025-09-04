@@ -1,18 +1,16 @@
-@for (certificate of certificates; track certificate.title) {
-<div class="margin-top pos-center flex-wrap">
-    <div class="card-margin">
-        <mat-card class="max-card-width">
-            <mat-card-header>
-                <div mat-card-avatar class="certificate-header-image"></div>
-                <mat-card-title>{{ certificate.title }}</mat-card-title>
-                <mat-card-subtitle>{{ certificate.subtitle }}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="certificate.src" [alt]="certificate.title">
-            <mat-card-content>
-                <p>
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div class="card-container">
+  @for (certificate of certificates; track certificate.title) {
+  <mat-card class="display-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar class="certificate-header-image"></div>
+      <mat-card-title>{{ certificate.title }}</mat-card-title>
+      <mat-card-subtitle>{{ certificate.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="certificate.src" [alt]="certificate.title">
+    <mat-card-content>
+      <p>
+      </p>
+    </mat-card-content>
+  </mat-card>
+  }
 </div>
-}
