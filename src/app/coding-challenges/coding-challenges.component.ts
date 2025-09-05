@@ -17,7 +17,7 @@ import { ChemistryCalculatorComponent } from './chemistry-calculator/chemistry-c
     // TreasureHuntComponent,
     // CrosswordComponent,
     // ToDoListComponent,
-    // DirectionsComponent,
+    DirectionsComponent,
     TicTacToeComponent,
     RomanNumeralsComponent,
     ChemistryCalculatorComponent
