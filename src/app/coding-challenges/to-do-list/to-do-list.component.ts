@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { ToDoComponent } from './to-do/to-do.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'to-do-list',
@@ -12,18 +14,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ToDoComponent,
     MatIconModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   standalone: true
 })
 export class ToDoListComponent {
-  @Input() title: string = '';
-  public toDo: string = '';
-  public listOfTodos: string[] = [];
+  title = 'To Do List';
+  toDo = signal<string>('');
+  listOfTodos: string[] = [];
 
   addToDo(todo: string) {
     this.listOfTodos.push(todo);
-    this.toDo = '';
+    this.toDo.set('');
   }
 
   removeItem($event: any) {

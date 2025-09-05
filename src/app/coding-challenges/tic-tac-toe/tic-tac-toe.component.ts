@@ -8,7 +8,7 @@ import { Component, input } from '@angular/core';
 })
 
 export class TicTacToeComponent {
-  title = input<string>('');
+  title = 'Tic Tac Toe';
   winnerStatus = ' ';
   gameOver = false;
   // A bit of complexity gets added because of @for() needing a unique property to track by which is why instead

@@ -15,8 +15,8 @@ import { ChemistryCalculatorComponent } from './chemistry-calculator/chemistry-c
   imports: [
     MatCardModule,
     // TreasureHuntComponent,
-    // CrosswordComponent,
-    // ToDoListComponent,
+    CrosswordComponent,
+    ToDoListComponent,
     DirectionsComponent,
     TicTacToeComponent,
     RomanNumeralsComponent,

@@ -21,7 +21,7 @@ import { MatListModule } from '@angular/material/list';
   standalone: true
 })
 export class ChemistryCalculatorComponent {
-  title = input<string>('');
+  title = 'Chemistry Calculator';
   compound = signal<string>('');
   Elements: any = {};
   ElementsArr: any[] = [];

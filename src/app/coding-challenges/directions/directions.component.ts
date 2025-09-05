@@ -15,7 +15,7 @@ import { MatListModule } from '@angular/material/list';
   standalone: true
 })
 export class DirectionsComponent {
-  title = input<string>('');
+  title = 'Directions';
   directions: string[] = [];
 
   addNorth() {

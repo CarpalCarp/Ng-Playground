@@ -2,18 +2,15 @@
 <mat-form-field>
   <mat-label>To do</mat-label>
   <input matInput type="text" [(ngModel)]="toDo">
-  @if (toDo) {
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="toDo=''">
+  <button mat-button matSuffix aria-label="Clear" (click)="toDo.set('')">
     <mat-icon>close</mat-icon>
   </button>
-  }
 </mat-form-field>
-<button mat-button color="primary" [disabled]="toDo === ''" (click)="addToDo(toDo)">Add</button>
+<button mat-button color="primary" [disabled]="toDo() === ''" (click)="addToDo(toDo())">Add</button>
 @if (listOfTodos.length !== 0) {
 <ul>
   @for (todo of listOfTodos; track todo; let i = $index) {
-  <to-do (removedTodo)="removeItem($event)" *ngFor="let todo of listOfTodos; let i = index" [singleTodo]="todo"
-    [indexOfTodo]="i"></to-do>
+  <to-do (removedTodo)="removeItem($event)" [singleTodo]="todo" [indexOfTodo]="i"></to-do>
   }
 </ul>
 }

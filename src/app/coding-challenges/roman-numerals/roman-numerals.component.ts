@@ -21,7 +21,7 @@ import { MatListModule } from '@angular/material/list';
   standalone: true
 })
 export class RomanNumeralsComponent {
-  title = input<string>('');
+  title = 'Roman Numerals';
   numeral = signal<string>('');
   romanToInt = [
     { numeral: "I", int: 1 },

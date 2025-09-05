@@ -1,6 +1,6 @@
 import { Word } from './word.model';
 import { InsertionMethods } from './insertionMethods.model';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { solveHelper } from './solvingMethods';
 
 interface CWMetaData {
@@ -19,7 +19,7 @@ interface CWMetaData {
   standalone: true
 })
 export class CrosswordComponent {
-  @Input() title: string = '';
+  title = 'Crossword';
   private NUMOFCOLUMNS: number = 10;
   private NUMOFROWS: number = 10;
   private HALFWAYPOINT: number = this.NUMOFCOLUMNS / 2;
@@ -29,7 +29,7 @@ export class CrosswordComponent {
   private takenSpaces: string[] = [];
 
 
-  public crossword: string[][] = [
+  crossword: string[][] = [
     new Array(this.NUMOFCOLUMNS),
     new Array(this.NUMOFCOLUMNS),
     new Array(this.NUMOFCOLUMNS),
@@ -43,7 +43,7 @@ export class CrosswordComponent {
   ];
 
   // words must not be greater than 5 characters
-  public words: Word[] = [
+  words: Word[] = [
     new Word("CAT"),
     new Word("BIRD"),
     new Word("RIVER"),
@@ -56,7 +56,7 @@ export class CrosswordComponent {
   }
 
   // go through all span tags and reset color attribute to black just in case they were highlighted before
-  public resetHighlight() {
+  resetHighlight() {
     for (let row = 0; row < this.crossword.length; row++) {
       for (let col = 0; col < this.crossword[row].length; col++) {
         document.getElementById(`${row},${col}`)?.setAttribute("style", "background-color:white");
@@ -64,23 +64,27 @@ export class CrosswordComponent {
     }
   }
 
-  private resetTakenSpaces() {
-    this.takenSpaces = [];
-  }
-
-  public initializeCrossword() {
+  initializeCrossword() {
     this.resetTakenSpaces();
     this.resetHighlight();
     this.generateRandomCrossword();
     this.insertWords();
   }
 
-  public generateRandomCrossword() {
+  generateRandomCrossword() {
     for (let row = 0; row < this.crossword.length; row++) {
       for (let col = 0; col < this.crossword[row].length; col++) {
         this.crossword[row][col] = String.fromCharCode(Math.floor(Math.random() * this.ASCIICAPITALCHARAMOUNT) + this.ASCIICAPITALMAX);
       }
     }
+  }
+
+  solve() {
+    solveHelper(this.words, this.crossword, this.NUMOFROWS);
+  }
+
+  private resetTakenSpaces() {
+    this.takenSpaces = [];
   }
 
   private insertWords() {
@@ -147,12 +151,10 @@ export class CrosswordComponent {
   private insertHelper(MetaData: CWMetaData, i: number) {
     if (!this.takenSpaces.includes(`${MetaData.row},${MetaData.col}`)) {
       this.checkIfReverse(MetaData, i);
-      //console.log(`Added ${word.split('')[i]} to ${row},${col}`);
     } else { // if spot in crossword is taken, then restart
-      //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
-      //console.log(`Retrying...`);
-      if (i > 0)
+      if (i > 0) {
         this.removeFromTakenSpaces(i);
+      }
       MetaData.iterator = -1;
       MetaData.row++;
       return MetaData;
@@ -169,8 +171,6 @@ export class CrosswordComponent {
       if (crosswdMetaData.row > this.NUMOFCOLUMNS - 1 || crosswdMetaData.row < 0)
         crosswdMetaData.row = 0;
       crosswdMetaData = this.diagonalMove(crosswdMetaData);
-      //console.log(`Spot taken for ${word.split('')[i]} of word ${word}`);
-      //console.log(`Retrying...`);
       this.removeFromTakenSpaces(i);
       crosswdMetaData.iterator = 0;
     } else
@@ -198,10 +198,5 @@ export class CrosswordComponent {
   private removeFromTakenSpaces(currentIndex: number) {
     for (let j = 0; j < currentIndex; j++)
       this.takenSpaces.pop();
-  }
-
-  // solving methods below
-  public solve() {
-    solveHelper(this.words, this.crossword, this.NUMOFROWS);
   }
 }
