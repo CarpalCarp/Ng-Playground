@@ -1,11 +1,11 @@
-<h3>{{ title }}</h3>
+<h3>{{ title() }}</h3>
 <h3>{{ winnerStatus }}</h3>
 <div class="gameBoard">
-  @for (row of ticTacGameBoard; track row; let i = $index) {
+  @for (rowData of ticTacGameBoard; track rowData.id; let i = $index) {
   <div class="gameBoardRow">
-    @for (col of row; track col; let j = $index) {
-    <span [class]="col" class="gameBoardSquare" (click)="getToken(col, i, j)">
-      {{ col }}
+    @for (col of rowData.rowList; track col.id; let j = $index) {
+    <span [class]="col.colValue" class="gameBoardSquare" (click)="getToken(col.colValue, i, j)">
+      {{ col.colValue }}
     </span>
     }
   </div>
