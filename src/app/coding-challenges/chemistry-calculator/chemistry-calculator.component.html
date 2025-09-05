@@ -1,25 +1,23 @@
-<h3>{{ title }}</h3>
+<h3>{{ title() }}</h3>
 <mat-form-field>
   <mat-label>Enter compound</mat-label>
   <input matInput type="text" [(ngModel)]="compound">
-  @if (compound) {
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="compound=''">
+  <button mat-button matSuffix aria-label="Clear" (click)="compound.set('')">
     <mat-icon>close</mat-icon>
   </button>
-  }
 </mat-form-field>
-<button mat-button color="primary" [disabled]="compound === ''" (click)="parseMolecule(compound)">Calculate</button>
+<button mat-button color="primary" [disabled]="compound() === ''" (click)="parseMolecule(compound())">Calculate</button>
 <h5>Example Compounds:</h5>
 @for (compound of compoundExamples; track compound) {
-<mat-list-item role="listitem">
+<mat-list-item>
   {{ compound }}
 </mat-list-item>
 }
 @if (ElementsArr.length > 0) {
-<mat-list role="list">
+<mat-list>
   <h5>Elements:</h5>
   @for (property of ElementsArr; track property) {
-  <mat-list-item role="listitem">{{ property[0] }}: {{
+  <mat-list-item>{{ property[0] }}: {{
     property[1] }}
   </mat-list-item>
   }

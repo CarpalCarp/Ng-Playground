@@ -1,17 +1,15 @@
-<h3>{{ title }}</h3>
+<h3>{{ title() }}</h3>
 <mat-form-field>
   <mat-label>Enter Numeral</mat-label>
   <input matInput type="text" [(ngModel)]="numeral">
-  @if (numeral) {
-  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="numeral=''">
+  <button mat-button matSuffix aria-label="Clear" (click)="numeral.set('')">
     <mat-icon>close</mat-icon>
   </button>
-  }
 </mat-form-field>
-<button mat-button color="primary" [disabled]="numeral === ''" (click)="calculateNumeral(numeral)">Enter</button>
+<button mat-button color="primary" [disabled]="numeral() === ''" (click)="calculateNumeral(numeral())">Enter</button>
 <h5>Roman to Integer List:</h5>
-@for (roman of romanToInt; track roman) {
-<mat-list-item role="listitem">
+@for (roman of romanToInt; track roman.numeral) {
+<mat-list-item>
   {{ roman.numeral }}: {{ roman.int }}
 </mat-list-item>
 }

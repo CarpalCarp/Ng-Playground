@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -12,16 +14,18 @@ import { MatListModule } from '@angular/material/list';
     MatListModule,
     MatIconModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   standalone: true
 })
 export class ChemistryCalculatorComponent {
-  @Input() title: string = '';
-  public compound: string = '';
-  public Elements: any = {};
-  public ElementsArr: any[] = [];
-  public compoundExamples: string[] = ['H2O', 'H2O2', 'NaHCO3', 'C6H12O6'];
+  title = input<string>('');
+  compound = signal<string>('');
+  Elements: any = {};
+  ElementsArr: any[] = [];
+  compoundExamples: string[] = ['H2O', 'H2O2', 'NaHCO3', 'C6H12O6'];
 
   private isNumber = (value: string) => !isNaN(parseInt(value));
   private isElement = (value: string) => /[A-Za-z]/.test(value);
@@ -41,7 +45,7 @@ export class ChemistryCalculatorComponent {
       Elements[element] += multiplier;
   }
 
-  public parseMolecule(formula: string) {
+  parseMolecule(formula: string) {
     this.Elements = {};
     let multiplier: number = 1;
     let multiplierStack: number[] = []; // keeps track of multiplier groups

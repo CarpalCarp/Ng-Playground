@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -12,14 +14,16 @@ import { MatListModule } from '@angular/material/list';
     MatListModule,
     MatIconModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   standalone: true
 })
 export class RomanNumeralsComponent {
-  @Input() title: string = '';
-  public numeral: string = '';
-  public romanToInt = [
+  title = input<string>('');
+  numeral = signal<string>('');
+  romanToInt = [
     { numeral: "I", int: 1 },
     { numeral: "V", int: 5 },
     { numeral: "X", int: 10 },
@@ -28,7 +32,7 @@ export class RomanNumeralsComponent {
     { numeral: "D", int: 500 },
     { numeral: "M", int: 1000 }
   ];
-  public symTable: Map<string, string> = new Map([
+  symTable: Map<string, string> = new Map([
     ["I", "1"],
     ["V", "5"],
     ["X", "10"],
@@ -38,12 +42,12 @@ export class RomanNumeralsComponent {
     ["M", "1000"],
   ]);
 
-  public calculateNumeral(_numeral: string) {
-    this.numeral = _numeral
+  calculateNumeral(_numeral: string) {
+    this.numeral.set(_numeral.toUpperCase()
       .split('') // split into array of characters
       .map(romNum => romNum = this.symTable.get(romNum)!) // get the number from the corresponding Roman Numeral
       .map(romNum => parseInt(romNum)) // change array of strings into array of numbers
       .reduceRight((prev, cur, i, arr) => (arr[i + 1] > cur) ? prev - cur : prev + cur) // add up the numbers
-      .toString();
+      .toString());
   }
 }
