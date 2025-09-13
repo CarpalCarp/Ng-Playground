@@ -14,9 +14,9 @@ export class TicTacToeComponent {
   // A bit of complexity gets added because of @for() needing a unique property to track by which is why instead
   // of a 2D array of strings, an array of objects containing an array of objects is used
   emptyBoard = [
-    { rowList: [{ colValue: '-', id: 1 }, { colValue: '-', id: 2 }, { colValue: '-', id: 3 }], id: 1 },
-    { rowList: [{ colValue: '-', id: 4 }, { colValue: '-', id: 5 }, { colValue: '-', id: 6 }], id: 2 },
-    { rowList: [{ colValue: '-', id: 7 }, { colValue: '-', id: 8 }, { colValue: '-', id: 9 }], id: 3 }
+    ['-', '-', '-'],
+    ['-', '-', '-'],
+    ['-', '-', '-']
   ];
   ticTacGameBoard = structuredClone(this.emptyBoard);
   private xTurn = true;
@@ -24,9 +24,9 @@ export class TicTacToeComponent {
   getToken(token: string, row: number, col: number) {
     if (!this.gameOver) {
       if (this.xTurn)
-        this.ticTacGameBoard[row].rowList[col].colValue = 'X';
+        this.ticTacGameBoard[row][col] = 'X';
       else
-        this.ticTacGameBoard[row].rowList[col].colValue = 'O';
+        this.ticTacGameBoard[row][col] = 'O';
       this.xTurn = !this.xTurn;
 
       this.gameOver = this.checkWinner();
@@ -41,7 +41,7 @@ export class TicTacToeComponent {
   }
 
   private search(token: string, row: number, col: number, rowDirection: number, colDirection: number) {
-    const rowList = this.ticTacGameBoard[row].rowList;
+    const rowList = this.ticTacGameBoard[row];
     const winningTokenCount = 2; // need 2 more of the same tokens to win
     for (let i = 0; i < winningTokenCount; i++) {
       // Depending on whether rowDir and colDir were a 1, -1 or a 0,
@@ -53,7 +53,7 @@ export class TicTacToeComponent {
       if (row < 0 || col < 0 || col > rowList.length)
         return false;
 
-      if (rowList[col] && rowList[col].colValue === token)
+      if (rowList[col] && rowList[col] === token)
         continue;
       else
         return false;
@@ -74,8 +74,8 @@ export class TicTacToeComponent {
 
   private checkWinner() {
     for (let row = this.ticTacGameBoard.length - 1; row >= 0; row--) {
-      for (let col = 0; col < this.ticTacGameBoard[row].rowList.length; col++) {
-        const colValue = this.ticTacGameBoard[row].rowList[col].colValue;
+      for (let col = 0; col < this.ticTacGameBoard[row].length; col++) {
+        const colValue = this.ticTacGameBoard[row][col];
         if (colValue === '-')
           continue;
 
