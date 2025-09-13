@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { TreasureHuntComponent } from './treasure-hunt/treasure-hunt.component';
+import { TreasureHuntComponent } from './treasure-hunt/treasure-hunt.component';
 import { MatCardModule } from '@angular/material/card';
 import { CrosswordComponent } from './crossword/crossword.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
@@ -14,7 +14,7 @@ import { ChemistryCalculatorComponent } from './chemistry-calculator/chemistry-c
   styleUrls: ['./coding-challenges.component.css'],
   imports: [
     MatCardModule,
-    // TreasureHuntComponent,
+    TreasureHuntComponent,
     CrosswordComponent,
     ToDoListComponent,
     DirectionsComponent,

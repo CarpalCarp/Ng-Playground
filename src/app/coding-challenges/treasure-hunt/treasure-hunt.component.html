@@ -8,12 +8,12 @@
     </main>
     <div>
       <div id="map-border">
-        @for (row of miniMap; track row; let i = $index) {
+        @for (row of miniMap; track row.id; let i = $index) {
         <aside>
-          @for (terrain of row; track terrain; let j = $index) {
+          @for (terrain of row.rowList; track terrain.id; let j = $index) {
           <div>
-            @if (terrain !== '-') {
-            <img src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain}}" height="60px" width="60px">
+            @if (terrain.colValue !== '-') {
+            <img src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain.colValue}}" height="60px" width="60px">
             }
             @else if ((i === 2 && j === 2) && player != undefined) {
             <img class="player" src="{{getPlayerImg()}}" alt="{{getPlayerImg()}}" height="60px" width="60px">

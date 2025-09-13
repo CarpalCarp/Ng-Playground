@@ -7,9 +7,9 @@
   </ul>
   }
 </div>
-@for (row of crossword; track row; let i = $index) {
+@for (row of crossword; track $index; let i = $index) {
 <div id="crosswordDiv">
-  @for (element of row; track element; let j = $index) {
+  @for (element of row; track $index; let j = $index) {
   <span>
     <span [id]="[i,j]">{{ element }}</span>
   </span>

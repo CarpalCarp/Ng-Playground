@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameMap } from './map.model';
 import { GameConsole } from './game-console.model';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-treasure-hunt',
@@ -10,13 +11,20 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./treasure-hunt.component.css'],
   imports: [
     FormsModule,
+    MatButtonModule
   ],
   standalone: true
 })
 export class TreasureHuntComponent implements OnInit {
   gameConsole: GameConsole;
   player: GameChar;
-  miniMap: string[][];
+  miniMap = [
+    { rowList: [{ colValue: '-', id: 1 }, { colValue: '-', id: 2 }, { colValue: '-', id: 3 }, { colValue: '-', id: 4 }, { colValue: '-', id: 5 }], id: 1 },
+    { rowList: [{ colValue: '-', id: 6 }, { colValue: '-', id: 7 }, { colValue: '-', id: 8 }, { colValue: '-', id: 9 }, { colValue: '-', id: 10 }], id: 2 },
+    { rowList: [{ colValue: '-', id: 11 }, { colValue: '-', id: 12 }, { colValue: '-', id: 13 }, { colValue: '-', id: 14 }, { colValue: '-', id: 15 }], id: 3 },
+    { rowList: [{ colValue: '-', id: 16 }, { colValue: '-', id: 17 }, { colValue: '-', id: 18 }, { colValue: '-', id: 19 }, { colValue: '-', id: 20 }], id: 4 },
+    { rowList: [{ colValue: '-', id: 21 }, { colValue: '-', id: 22 }, { colValue: '-', id: 23 }, { colValue: '-', id: 24 }, { colValue: '-', id: 25 }], id: 5 },
+  ];
   charToCommand: { [index: string]: (valueTwo: string, gameConsole: GameConsole) => void } = {
     g: (valueTwo: string, gameConsole: GameConsole) => this.go(valueTwo, gameConsole),
     t: (valueTwo: string, gameConsole: GameConsole) => this.player.takeItem(valueTwo, gameConsole),
@@ -29,13 +37,6 @@ export class TreasureHuntComponent implements OnInit {
   private gameMap: GameMap;
 
   constructor() {
-    this.miniMap = [
-      ['-', '-', '-', '-', '-'],
-      ['-', '-', '-', '-', '-'],
-      ['-', '-', '-', '-', '-'],
-      ['-', '-', '-', '-', '-'],
-      ['-', '-', '-', '-', '-'],
-    ];
     this.gameConsole = {
       textArea: `Enter\nhelp\nfor list of commands\n`
     };
@@ -121,7 +122,7 @@ export class TreasureHuntComponent implements OnInit {
     let miniMapCol = 0;
     for (let row = startingRow; row < startingRow + this.gameMap.miniMapSize; row++) {
       for (let col = startingCol; col < startingCol + this.gameMap.miniMapSize; col++) {
-        this.miniMap[miniMapRow][miniMapCol] = this.getMiniMapImg(this.gameMap.map[row][col])!;
+        this.miniMap[miniMapRow].rowList[miniMapCol].colValue = this.getMiniMapImg(this.gameMap.map[row][col])!;
         miniMapCol++;
       }
       miniMapCol = 0;
