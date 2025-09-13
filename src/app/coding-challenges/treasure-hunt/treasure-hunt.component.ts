@@ -19,11 +19,11 @@ export class TreasureHuntComponent implements OnInit {
   gameConsole: GameConsole;
   player: GameChar;
   miniMap = [
-    { rowList: [{ colValue: '-', id: 1 }, { colValue: '-', id: 2 }, { colValue: '-', id: 3 }, { colValue: '-', id: 4 }, { colValue: '-', id: 5 }], id: 1 },
-    { rowList: [{ colValue: '-', id: 6 }, { colValue: '-', id: 7 }, { colValue: '-', id: 8 }, { colValue: '-', id: 9 }, { colValue: '-', id: 10 }], id: 2 },
-    { rowList: [{ colValue: '-', id: 11 }, { colValue: '-', id: 12 }, { colValue: '-', id: 13 }, { colValue: '-', id: 14 }, { colValue: '-', id: 15 }], id: 3 },
-    { rowList: [{ colValue: '-', id: 16 }, { colValue: '-', id: 17 }, { colValue: '-', id: 18 }, { colValue: '-', id: 19 }, { colValue: '-', id: 20 }], id: 4 },
-    { rowList: [{ colValue: '-', id: 21 }, { colValue: '-', id: 22 }, { colValue: '-', id: 23 }, { colValue: '-', id: 24 }, { colValue: '-', id: 25 }], id: 5 },
+    ['-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-']
   ];
   charToCommand: { [index: string]: (valueTwo: string, gameConsole: GameConsole) => void } = {
     g: (valueTwo: string, gameConsole: GameConsole) => this.go(valueTwo, gameConsole),
@@ -48,6 +48,70 @@ export class TreasureHuntComponent implements OnInit {
   ngOnInit() {
     this.readMapFile('./assets/treasure-hunt/map-files/map1.txt');
     this.readItemFile('./assets/treasure-hunt/map-files/map1items.txt');
+  }
+
+  restart() {
+    this.gameConsole.textArea = '';
+    this.player.restartPlayerLocation();
+    this.setMiniMap()// update mini map
+  }
+
+  setMiniMap() {
+    const startingRow = this.player.row - 2;
+    const startingCol = this.player.col - 2;
+    let miniMapRow = 0;
+    let miniMapCol = 0;
+    for (let row = startingRow; row < startingRow + this.gameMap.miniMapSize; row++) {
+      for (let col = startingCol; col < startingCol + this.gameMap.miniMapSize; col++) {
+        this.miniMap[miniMapRow][miniMapCol] = this.getMiniMapImg(this.gameMap.map[row][col])!;
+        miniMapCol++;
+      }
+      miniMapCol = 0;
+      miniMapRow++;
+    }
+  }
+
+  getMiniMapImg(mapChar: string) {
+    if (!this.gameMap.CharToImg.has(mapChar))
+      return '-';
+    else
+      return this.gameMap.CharToImg.get(mapChar);
+  }
+
+  getPlayerImg() {
+    if (this.gameMap.person.terrainImage === '')
+      return './assets/treasure-hunt/MapPics/NoImage.png';
+    else
+      return './assets/treasure-hunt/' + this.gameMap.person.terrainImage;
+  }
+
+  getDefaultImage() {
+    return './assets/treasure-hunt/MapPics/NoImage.png';
+  }
+
+  parseCommands(inputField: HTMLInputElement) {
+    const inputList: string[] = inputField.value.toLowerCase().split(' ');
+    const valueOne = inputList[0];
+    let valueTwo = inputList.slice(1).join(' '); // valueTwo is everything that comes after valueOne
+    if (this.player.itemInLocation !== '' && valueTwo === '')
+      valueTwo = this.player.itemInLocation;
+
+    if (!valueOne || !(valueOne[0] in this.charToCommand)) {
+      this.gameConsole.textArea += ''; // display error message
+    } else {
+      this.charToCommand[valueOne[0]](valueTwo, this.gameConsole)
+    }
+  }
+
+  go(direction: string, gameConsole: GameConsole) {
+    this.gameConsole.textArea += this.player.move(direction, this.gameMap); // move
+    this.gameConsole.textArea += this.player.displayLocation(this.gameMap); // display location
+    this.setMiniMap()// update mini map
+    this.player.searchForItems(this.gameConsole);// search for items
+  }
+
+  help(valueTwo: string, gameConsole: GameConsole) {
+    this.gameConsole.textArea += `// Game controls //\ngo <direction> //\nmoves character around\ntake <item name> // take an item, including the item name is optional\ndrop <item> // drop an item from inventory\ninventory // show items in inventory`;
   }
 
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
@@ -107,70 +171,5 @@ export class TreasureHuntComponent implements OnInit {
 
   private getMetaData(text: string) {
     return text.split('\n');
-  }
-
-  public restart() {
-    this.gameConsole.textArea = '';
-    this.player.restartPlayerLocation();
-    this.setMiniMap()// update mini map
-  }
-
-  public setMiniMap() {
-    let startingRow = this.player.row - 2;
-    let startingCol = this.player.col - 2;
-    let miniMapRow = 0;
-    let miniMapCol = 0;
-    for (let row = startingRow; row < startingRow + this.gameMap.miniMapSize; row++) {
-      for (let col = startingCol; col < startingCol + this.gameMap.miniMapSize; col++) {
-        this.miniMap[miniMapRow].rowList[miniMapCol].colValue = this.getMiniMapImg(this.gameMap.map[row][col])!;
-        miniMapCol++;
-      }
-      miniMapCol = 0;
-      miniMapRow++;
-    }
-  }
-
-  public getMiniMapImg(mapChar: string) {
-    if (!this.gameMap.CharToImg.has(mapChar))
-      return '-';
-    else
-      return this.gameMap.CharToImg.get(mapChar);
-  }
-
-  public getPlayerImg() {
-    if (this.gameMap.person.terrainImage === '')
-      return "./assets/treasure-hunt/MapPics/NoImage.png";
-    else
-      return "./assets/treasure-hunt/" + this.gameMap.person.terrainImage;
-  }
-
-  public getDefaultImage() {
-    return "./assets/treasure-hunt/MapPics/NoImage.png";
-  }
-
-  public parseCommands(inputField: HTMLInputElement) {
-    let inputList: string[] = inputField.value.toLowerCase().split(' ');
-    let valueOne = inputList[0];
-    let valueTwo = inputList.slice(1).join(' '); // valueTwo is everything that comes after valueOne
-    if (this.player.itemInLocation !== '' && valueTwo === '')
-      valueTwo = this.player.itemInLocation;
-
-    // elsewhere
-    if (!valueOne || !(valueOne[0] in this.charToCommand)) {
-      this.gameConsole.textArea += ''; // display error message
-    } else {
-      this.charToCommand[valueOne[0]](valueTwo, this.gameConsole)
-    }
-  }
-
-  public go(direction: string, gameConsole: GameConsole) {
-    this.gameConsole.textArea += this.player.move(direction, this.gameMap); // move
-    this.gameConsole.textArea += this.player.displayLocation(this.gameMap); // display location
-    this.setMiniMap()// update mini map
-    this.player.searchForItems(this.gameConsole);// search for items
-  }
-
-  public help(valueTwo: string, gameConsole: GameConsole) {
-    this.gameConsole.textArea += `// Game controls //\ngo <direction> //\nmoves character around\ntake <item name> // take an item, including the item name is optional\ndrop <item> // drop an item from inventory\ninventory // show items in inventory`;
   }
 }
