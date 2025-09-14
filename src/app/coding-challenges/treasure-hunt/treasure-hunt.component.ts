@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 export class TreasureHuntComponent implements OnInit {
   gameConsole: GameConsole;
   player: GameChar;
+  playerImage: string = './assets/treasure-hunt/MapPics/NoImage.png';
+  defaultImage: string = './assets/treasure-hunt/MapPics/NoImage.png';
   miniMap = [
     ['-', '-', '-', '-', '-'],
     ['-', '-', '-', '-', '-'],
@@ -78,15 +80,8 @@ export class TreasureHuntComponent implements OnInit {
       return this.gameMap.CharToImg.get(mapChar);
   }
 
-  getPlayerImg() {
-    if (this.gameMap.person.terrainImage === '')
-      return './assets/treasure-hunt/MapPics/NoImage.png';
-    else
-      return './assets/treasure-hunt/' + this.gameMap.person.terrainImage;
-  }
-
-  getDefaultImage() {
-    return './assets/treasure-hunt/MapPics/NoImage.png';
+  setPlayerImg() {
+    this.playerImage = './assets/treasure-hunt/' + this.gameMap.person.terrainImage;
   }
 
   parseCommands(inputField: HTMLInputElement) {
@@ -117,23 +112,21 @@ export class TreasureHuntComponent implements OnInit {
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
   // but the program will always be small and so it's fine
   private async readMapFile(mapFileName: string) {
-    let mapMetaData = [''];
-    mapMetaData = await this.read(mapMetaData, mapFileName);
+    const mapMetaData = await this.read(mapFileName);
     this.parseMapFile(mapMetaData);
     this.setMiniMap();
   }
 
   private async readItemFile(itemFileName: string) {
-    let itemMetaData = [''];
-    itemMetaData = await this.read(itemMetaData, itemFileName);
+    const itemMetaData = await this.read(itemFileName);
     this.parseItemFile(itemMetaData);
   }
 
-  private async read(metaData: string[], fileName: string) {
-    metaData = await fetch(fileName)
-      .then(response => response.text())
-      .then(text => { return this.getMetaData(text) });
-    return metaData;
+  private async read(fileName: string) {
+    const response = await fetch(fileName);
+    const text = await response.text();
+    const data = this.getFileData(text);
+    return data;
   }
 
   private parseMapFile(mapMetaData: string[]) {
@@ -146,7 +139,7 @@ export class TreasureHuntComponent implements OnInit {
     this.gameMap = new GameMap(totalRows + 4, totalColumns + 4);
     this.gameMap.initializeMap();
 
-    while (lineNo < (2 + totalRows)) { // read over map character data 
+    while (lineNo < (2 + totalRows)) { // read over map character data
       if (mapMetaData[lineNo].length !== totalColumns) {
         this.gameConsole.textArea += `Error in map file. Line number: ${(lineNo + 1)} does not have ${totalColumns} columns.`;
         return;
@@ -160,6 +153,7 @@ export class TreasureHuntComponent implements OnInit {
       lineNo++;
     }
     this.gameMap.setCharToImageObj();
+    this.setPlayerImg();
   }
 
   private parseItemFile(itemMetaData: string[]) {
@@ -169,7 +163,11 @@ export class TreasureHuntComponent implements OnInit {
     }
   }
 
-  private getMetaData(text: string) {
-    return text.split('\n');
+  private getFileData(text: string) {
+    let splitOn = '\n';
+    if (text.includes('\r\n')) {
+      splitOn = '\r\n';
+    }
+    return text.split(splitOn);
   }
 }

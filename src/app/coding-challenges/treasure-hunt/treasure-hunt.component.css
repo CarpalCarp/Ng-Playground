@@ -1,51 +1,52 @@
-textarea:hover{
+textarea:hover {
     cursor: default;
 }
 
-main{
+main {
     text-align: center;
 }
 
-nav{
+nav {
     background-color: green;
 }
 
-section{
+section {
     background-color: yellow;
 }
 
-nav, section{
+nav,
+section {
     padding: 10px;
 }
 
-textarea{
+textarea {
     margin: 10px;
     resize: none;
 }
 
-textarea:focus{
+textarea:focus {
     outline: none;
 }
 
-aside{
+aside {
     display: flex;
     flex-wrap: wrap;
     width: 308px;
 }
 
-#map-border{
+#map-border {
     border: 4px solid black;
     border-radius: 10px;
     width: 308px;
 }
 
-.nozone{
+.nozone {
     background-color: black;
     min-width: 60px;
     min-height: 60px;
 }
 
-.player{
+.player {
     position: absolute;
-    left: 140px;
+    left: 126px;
 }
