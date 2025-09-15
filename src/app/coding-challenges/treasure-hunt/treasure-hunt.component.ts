@@ -1,5 +1,5 @@
 import { GameChar } from './game-char.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GameMap } from './map.model';
 import { GameConsole } from './game-console.model';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true
 })
 export class TreasureHuntComponent implements OnInit {
+  @ViewChild('textarea') textArea!: ElementRef;
   gameConsole: GameConsole;
   player: GameChar;
   playerImage: string = './assets/treasure-hunt/MapPics/NoImage.png';
@@ -96,6 +97,7 @@ export class TreasureHuntComponent implements OnInit {
     } else {
       this.charToCommand[valueOne[0]](valueTwo, this.gameConsole)
     }
+    this.scrollToBottom();
   }
 
   go(direction: string, gameConsole: GameConsole) {
@@ -107,6 +109,13 @@ export class TreasureHuntComponent implements OnInit {
 
   help(valueTwo: string, gameConsole: GameConsole) {
     this.gameConsole.textArea += `// Game controls //\ngo <direction> //\nmoves character around\ntake <item name> // take an item, including the item name is optional\ndrop <item> // drop an item from inventory\ninventory // show items in inventory`;
+  }
+
+  private scrollToBottom() {
+    // Request the browser to auto scroll before the next repaint. Removes textarea flicker.
+    window.requestAnimationFrame(() => {
+      this.textArea.nativeElement.scrollTop = this.textArea.nativeElement.scrollHeight;
+    });
   }
 
   // Note: I am reading all contents of the file into memory which I call mapMetaData first, I know it's bad practice to read files this way
