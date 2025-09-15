@@ -134,8 +134,7 @@ export class TreasureHuntComponent implements OnInit {
   private async read(fileName: string) {
     const response = await fetch(fileName);
     const text = await response.text();
-    const data = this.getFileData(text);
-    return data;
+    return this.getFileData(text);
   }
 
   private parseMapFile(mapMetaData: string[]) {

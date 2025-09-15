@@ -82,7 +82,7 @@ export class GameChar {
     }
 
     public displayLocation(gameMap: GameMap) {
-        return `Location: (${this.row_ - this.mapBoundary_},${this.col_ - this.mapBoundary_}) in terrain: ${gameMap.map[this.row_][this.col_]}.\n`;
+        return `Location: (${this.row_ - this.mapBoundary_},${this.col_ - this.mapBoundary_}) in terrain: ${gameMap.map[this.row_][this.col_]}\n`;
     }
 
     public createItemObjects(row: number, col: number, name: string) {

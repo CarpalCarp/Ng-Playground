@@ -4,23 +4,23 @@
   </nav>
   <main>
     <textarea #textarea name="console" id="" cols="40" rows="14" readonly [(ngModel)]="gameConsole.textArea"></textarea>
-    <div id="map-border">
+    <div class="map">
       @for (row of miniMap; track $index; let i = $index) {
-      <aside>
+      <div>
         @for (terrain of row; track $index; let j = $index) {
         <div>
           @if (terrain !== '-') {
-          <img src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain}}" height="60px" width="60px">
+          <img src="./assets/treasure-hunt/{{terrain}}" alt="{{terrain}}" class="image-tile">
           }
           @else {
-          <img src="{{defaultImage}}" height="60px" width="60px">
+          <img src="{{defaultImage}}" class="image-tile" alt="{{defaultImage}}">
           }
           @if ((i === 2 && j === 2) && player !== undefined) {
-          <img class="player" src="{{playerImage}}" alt="{{playerImage}}" height="60px" width="60px">
+          <img class="player" src="{{playerImage}}" alt="{{playerImage}}">
           }
         </div>
         }
-      </aside>
+      </div>
       }
     </div>
   </main>

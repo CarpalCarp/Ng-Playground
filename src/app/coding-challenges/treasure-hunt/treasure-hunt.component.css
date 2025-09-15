@@ -31,15 +31,16 @@ textarea:hover {
     cursor: default;
 }
 
-aside {
-    display: flex;
-    flex-wrap: wrap;
-    width: 308px;
-}
-
-#map-border {
+.map {
     border: 4px solid black;
     border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+}
+
+.map>div {
+    display: flex;
+    flex-wrap: wrap;
     width: 308px;
 }
 
@@ -52,4 +53,9 @@ aside {
 .player {
     position: absolute;
     left: 168px;
+}
+
+.image-tile {
+    height: 100%;
+    width: 60px;
 }
